@@ -2075,45 +2075,12 @@ html.lang-running .lang-sweep-stripe-3 { animation: lang-sweep-in 1.2s cubic-bez
   100% { transform: translateX(260%) skewX(-14deg); opacity: 0; }
 }
 
-/* Stars overlay used by the EN sweep */
-.lang-sweep-stars {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 55%;
-  left: 0;
-  display: none;
-  align-items: center;
-  justify-content: space-around;
-  transform: translateX(-160%) skewX(-14deg);
-  opacity: 0;
-  pointer-events: none;
-  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-  color: #FFFFFF;
-  text-shadow:
-    0 0 12px rgba(255, 255, 255, 0.95),
-    0 0 24px rgba(255, 255, 255, 0.6);
-}
-.lang-sweep-stars span {
-  display: inline-block;
-  transform: skewX(14deg);
-}
-html[data-switching-to="en"] .lang-sweep-stars { display: flex; }
-html.lang-running[data-switching-to="en"] .lang-sweep-stars {
-  animation: lang-sweep-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-}
-
-/* Spain flag — red, yellow, red */
-html[data-switching-to="es"] {
-  --sweep-c1: rgba(170, 21, 27, 0.6);
-  --sweep-c2: rgba(241, 191, 0, 0.7);
-  --sweep-c3: rgba(170, 21, 27, 0.6);
-}
-/* US flag — red, navy, red (stars take the place of the white stripe) */
+/* Brand teal palette for both languages */
+html[data-switching-to="es"],
 html[data-switching-to="en"] {
-  --sweep-c1: rgba(191, 10, 48, 0.55);
-  --sweep-c2: rgba(1, 33, 105, 0.55);
-  --sweep-c3: rgba(191, 10, 48, 0.55);
+  --sweep-c1: rgba(13, 104, 133, 0.55);   /* deep teal */
+  --sweep-c2: rgba(43, 163, 199, 0.6);    /* bright teal */
+  --sweep-c3: rgba(95, 196, 220, 0.55);   /* teal glow */
 }
 
 /* ============= DARK MODE OVERRIDES ============= */

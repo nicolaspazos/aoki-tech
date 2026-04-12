@@ -23,7 +23,7 @@
       'hero.stat2Label': 'Más facturación',
       'hero.stat3Label': 'Atención sin pausa',
 
-      'chat.title': 'Aoki · La Primera Café',
+      'chat.title': 'La Primera Café',
       'chat.status': 'En línea · Agente IA',
       'chat.b1': 'Hola! Quiero el menú del día 🍽️',
       'chat.b2': '¡Hola! Por supuesto, te paso el menú de hoy 👇',
@@ -168,7 +168,7 @@
       'hero.stat2Label': 'More revenue',
       'hero.stat3Label': 'Always on',
 
-      'chat.title': 'Aoki · La Primera Café',
+      'chat.title': 'La Primera Café',
       'chat.status': 'Online · AI Agent',
       'chat.b1': "Hi! I'd like today's menu 🍽️",
       'chat.b2': "Hi there! Sure, here's today's menu 👇",
