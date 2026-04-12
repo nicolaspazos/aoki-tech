@@ -473,6 +473,10 @@
       applyLang(lang);
       return;
     }
+    // Set the target-lang attr first so the colored ribbons read the right palette
+    root.dataset.switchingTo = lang;
+    // Force a reflow so the freshly-set attribute applies before the animation class
+    void root.offsetWidth;
     root.classList.add('lang-switching');
     setTimeout(() => {
       applyLang(lang);
@@ -481,6 +485,9 @@
     setTimeout(() => {
       root.classList.remove('lang-switching');
     }, 360);
+    setTimeout(() => {
+      delete root.dataset.switchingTo;
+    }, 1300);
   }
 
   if (langToggle) {
