@@ -506,11 +506,16 @@
      ============================================================ */
   const header = document.getElementById('site-header');
   let ticking = false;
+  let headerScrolled = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      if (header) header.classList.toggle('is-scrolled', window.scrollY > 40);
+      const next = window.scrollY > 40;
+      if (header && next !== headerScrolled) {
+        header.classList.toggle('is-scrolled', next);
+        headerScrolled = next;
+      }
       ticking = false;
     });
   };
