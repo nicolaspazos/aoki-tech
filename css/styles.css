@@ -715,6 +715,49 @@ p { margin: 0; }
 .phone-frame.is-tilting {
   transition: transform 0.18s linear, box-shadow 0.6s var(--ease);
 }
+
+/* ===== PLATFORM PALETTES ===== */
+.phone-frame[data-platform="whatsapp"] {
+  --p-header-bg: linear-gradient(180deg, #075E54 0%, #128C7E 100%);
+  --p-header-color: #FFFFFF;
+  --p-status-color: rgba(220, 248, 198, 0.95);
+  --p-body-bg: #ECE5DD;
+  --p-in-bg: #FFFFFF;
+  --p-in-color: #1A2342;
+  --p-out-bg: #DCF8C6;
+  --p-out-color: #0F1F2E;
+  --p-out-shadow: 0 2px 8px -3px rgba(15, 23, 42, 0.18);
+  --p-send-bg: #25D366;
+  --p-send-shadow: 0 6px 14px -4px rgba(37, 211, 102, 0.55);
+}
+.phone-frame[data-platform="instagram"] {
+  --p-header-bg: #FFFFFF;
+  --p-header-color: #0B1430;
+  --p-status-color: #8E8E93;
+  --p-header-border: 1px solid #DBDBDB;
+  --p-body-bg: #FFFFFF;
+  --p-in-bg: #EFEFEF;
+  --p-in-color: #0B1430;
+  --p-out-bg: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+  --p-out-color: #FFFFFF;
+  --p-out-shadow: 0 6px 16px -6px rgba(253, 29, 29, 0.45);
+  --p-send-bg: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+  --p-send-shadow: 0 6px 14px -4px rgba(253, 29, 29, 0.55);
+}
+.phone-frame[data-platform="messenger"] {
+  --p-header-bg: #FFFFFF;
+  --p-header-color: #050505;
+  --p-status-color: #65676B;
+  --p-header-border: 1px solid #E4E6EB;
+  --p-body-bg: #FFFFFF;
+  --p-in-bg: #F0F0F0;
+  --p-in-color: #050505;
+  --p-out-bg: linear-gradient(135deg, #0099FF 0%, #A033FF 100%);
+  --p-out-color: #FFFFFF;
+  --p-out-shadow: 0 6px 16px -6px rgba(0, 132, 255, 0.5);
+  --p-send-bg: linear-gradient(135deg, #0099FF 0%, #A033FF 100%);
+  --p-send-shadow: 0 6px 14px -4px rgba(0, 132, 255, 0.55);
+}
 .phone-notch {
   position: absolute;
   top: 14px;

@@ -506,19 +506,37 @@
   setLang(initialLang, false);
 
   /* ============================================================
-     Chat replay loop
+     Chat replay loop + platform tabs
      ============================================================ */
   const chatBody = document.getElementById('chat-body');
-  if (chatBody) {
-    const bubbles = chatBody.querySelectorAll('.bubble');
-    const replay = () => {
-      bubbles.forEach(b => {
-        b.style.animation = 'none';
-        void b.offsetWidth;
-        b.style.animation = '';
+  const phoneFrame = document.querySelector('.phone-frame');
+  let chatBubbles = [];
+  if (chatBody) chatBubbles = Array.from(chatBody.querySelectorAll('.bubble'));
+  function replayChat() {
+    chatBubbles.forEach(b => {
+      b.style.animation = 'none';
+      void b.offsetWidth;
+      b.style.animation = '';
+    });
+  }
+  if (chatBody) setInterval(replayChat, 12000);
+
+  // Platform tabs
+  const chatTabs = document.querySelectorAll('.chat-tab');
+  if (chatTabs.length && phoneFrame) {
+    chatTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const platform = tab.dataset.platform;
+        if (!platform || phoneFrame.dataset.platform === platform) return;
+        chatTabs.forEach(t => {
+          const active = t === tab;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        phoneFrame.dataset.platform = platform;
+        replayChat();
       });
-    };
-    setInterval(replay, 12000);
+    });
   }
 
   /* ============================================================
