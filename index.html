@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
   <title>Aoki Tech | Tu Agente de IA que vende por vos 24/7</title>
   <meta name="description" content="Aoki Tech es la plataforma líder en automatización conversacional para LATAM. Creá tu Agente de IA en minutos y convertí visitantes en clientes 24/7 por WhatsApp e Instagram." />
-  <meta name="theme-color" content="#2563EB" />
+  <meta name="theme-color" content="#1382A4" />
 
   <!-- Open Graph -->
   <link rel="canonical" href="https://aokitech.com.ar/" />
@@ -48,21 +48,26 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20260412a" />
-  <link rel="icon" href="aoki-logo.png" type="image/png" />
-  <link rel="apple-touch-icon" href="aoki-logo.png" />
+  <link rel="stylesheet" href="css/styles.css?v=20260412c" />
+  <link rel="icon" href="aoki-favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="aoki-favicon.png" />
 
-  <!-- Theme bootstrap (prevents FOUC) — defaults to light -->
+  <!-- Theme + Lang bootstrap (prevents FOUC) -->
   <script>
     (function () {
       try {
-        var saved = localStorage.getItem('aoki-theme');
-        document.documentElement.setAttribute('data-theme', saved || 'light');
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
+        var t = localStorage.getItem('aoki-theme');
+        document.documentElement.setAttribute('data-theme', t || 'light');
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+      try {
+        var l = localStorage.getItem('aoki-lang');
+        if (l === 'en' || l === 'es') {
+          document.documentElement.lang = l;
+          document.documentElement.dataset.lang = l;
+        }
+      } catch (e) {}
     })();
   </script>
 </head>
@@ -71,25 +76,33 @@
   <!-- ═══ HEADER ═══ -->
   <header class="site-header" id="site-header">
     <div class="shell header-inner">
-      <a class="brand-mark" href="/" aria-label="Aoki Tech inicio">
+      <a class="brand-mark" href="/" aria-label="Aoki Tech">
         <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" />
       </a>
       <nav class="nav" id="primary-nav" aria-label="Principal">
-        <a href="#features">Funciones</a>
-        <a href="#steps">Cómo funciona</a>
-        <a href="#clients">Clientes</a>
-        <a href="#pricing">Precios</a>
-        <a href="#contact">Contacto</a>
+        <a href="#steps" data-i18n="nav.steps">Cómo funciona</a>
+        <a href="#clients" data-i18n="nav.clients">Clientes</a>
+        <a href="#pricing" data-i18n="nav.pricing">Precios</a>
+        <a class="header-login" href="#login" data-i18n="nav.login">Iniciar sesión</a>
+        <a class="btn btn-ghost header-secondary" href="#contact" data-i18n="nav.demo">Agendá una demo</a>
         <a class="btn btn-primary header-cta" href="#contact">
-          Creá tu Agente IA
+          <span data-i18n="nav.cta">Creá tu Agente IA</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </nav>
       <div class="header-actions">
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema oscuro" aria-pressed="false" title="Cambiar tema">
-          <svg class="theme-toggle-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"/>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema oscuro" aria-pressed="false" title="Tema">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
           </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language" data-active="es" title="Idioma / Language">
+          <span class="lang-opt" data-lang="es">ES</span>
+          <span class="lang-opt" data-lang="en">EN</span>
         </button>
         <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
           <span></span>
@@ -111,76 +124,74 @@
         <div class="hero-content">
           <span class="hero-eyebrow">
             <span class="dot"></span>
-            Meta Business Partner · Powered by GPT &amp; Gemini
+            <span data-i18n="hero.eyebrow">Meta Business Partner · Powered by GPT &amp; Gemini</span>
           </span>
-          <h1 class="hero-title">
+          <h1 class="hero-title" data-i18n-html="hero.title">
             <span class="row"><span class="word">Tu <span class="accent">agente de IA</span></span></span>
             <span class="row"><span class="word">que vende</span></span>
             <span class="row"><span class="word">por vos <span class="accent-alt">24/7.</span></span></span>
           </h1>
-          <p class="hero-lede">
+          <p class="hero-lede" data-i18n="hero.lede">
             Automatizá conversaciones por WhatsApp e Instagram, agendá reuniones, enviá archivos y cerrá ventas mientras dormís. Entrenado para tu negocio en minutos, sin código.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">
-              Probalo Gratis
+              <span data-i18n="hero.cta1">Probalo Gratis</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a class="btn btn-ghost" href="#features">
-              Ver funciones
-            </a>
+            <a class="btn btn-ghost" href="#features" data-i18n="hero.cta2">Ver funciones</a>
           </div>
           <div class="hero-stats">
             <div>
               <div class="hero-stat-num" data-count="45" data-suffix="%">+45%</div>
-              <div class="hero-stat-label">Horas ahorradas</div>
+              <div class="hero-stat-label" data-i18n="hero.stat1Label">Horas ahorradas</div>
             </div>
             <div>
               <div class="hero-stat-num" data-count="23" data-suffix="%">+23%</div>
-              <div class="hero-stat-label">Más facturación</div>
+              <div class="hero-stat-label" data-i18n="hero.stat2Label">Más facturación</div>
             </div>
             <div>
               <div class="hero-stat-num">24/7</div>
-              <div class="hero-stat-label">Atención sin pausa</div>
+              <div class="hero-stat-label" data-i18n="hero.stat3Label">Atención sin pausa</div>
             </div>
           </div>
         </div>
 
         <!-- Hero visual: phone chat mockup -->
-        <div class="hero-visual" id="hero-phone" aria-label="Demostración de chat con IA">
+        <div class="hero-visual" id="hero-phone" aria-label="Chat IA">
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
               <div class="chat-header">
                 <div class="chat-avatar">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5zm-7 16a7 7 0 0 1 14 0v3H5v-3z"/></svg>
+                  <img src="aoki-favicon.png" alt="Aoki" />
                 </div>
                 <div>
-                  <div class="chat-title">La Primera Café</div>
-                  <div class="chat-status"><span class="online-dot"></span> En línea · IA</div>
+                  <div class="chat-title" data-i18n="chat.title">Aoki · La Primera Café</div>
+                  <div class="chat-status"><span class="online-dot"></span> <span data-i18n="chat.status">En línea · Agente IA</span></div>
                 </div>
                 <div class="chat-actions" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 </div>
               </div>
               <div class="chat-body" id="chat-body">
-                <div class="bubble in" data-delay="0">Hola! Quiero el menú del día 🍽️</div>
-                <div class="bubble out" data-delay="1">¡Hola! Por supuesto, te paso el menú de hoy 👇</div>
+                <div class="bubble in" data-delay="0" data-i18n="chat.b1">Hola! Quiero el menú del día 🍽️</div>
+                <div class="bubble out" data-delay="1" data-i18n="chat.b2">¡Hola! Por supuesto, te paso el menú de hoy 👇</div>
                 <div class="bubble out file" data-delay="2">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                   <div>
-                    <div class="file-name">Menú-Almuerzo.pdf</div>
-                    <div class="file-meta">128 KB · PDF</div>
+                    <div class="file-name" data-i18n="chat.fileName">Menú-Almuerzo.pdf</div>
+                    <div class="file-meta" data-i18n="chat.fileMeta">128 KB · PDF</div>
                   </div>
                 </div>
-                <div class="bubble in" data-delay="3">¿Lo preparan para retirar?</div>
-                <div class="bubble out" data-delay="4">¡Dale! ¿Para qué hora lo querés? Tenemos turnos desde las 12:00 🕛</div>
-                <div class="bubble in typing" data-delay="5">
+                <div class="bubble in" data-delay="3" data-i18n="chat.b3">¿Lo preparan para retirar?</div>
+                <div class="bubble out" data-delay="4" data-i18n="chat.b4">¡Dale! ¿Para qué hora lo querés? Tenemos turnos desde las 12:00 🕛</div>
+                <div class="bubble in typing" data-delay="5" aria-hidden="true">
                   <span></span><span></span><span></span>
                 </div>
               </div>
               <div class="chat-input">
-                <span>Escribí un mensaje…</span>
+                <span data-i18n="chat.input">Escribí un mensaje…</span>
                 <button aria-label="Enviar">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                 </button>
@@ -190,25 +201,25 @@
           <div class="phone-badge phone-badge-1">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <div>
-              <div class="phone-badge-title">Respuestas automáticas</div>
-              <div class="phone-badge-sub">98.5% resueltas por IA</div>
+              <div class="phone-badge-title" data-i18n="badge1.title">Respuestas automáticas</div>
+              <div class="phone-badge-sub" data-i18n="badge1.sub">98.5% resueltas por IA</div>
             </div>
           </div>
           <div class="phone-badge phone-badge-2">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             <div>
-              <div class="phone-badge-title">Respuesta &lt; 2 seg</div>
-              <div class="phone-badge-sub">Sin filas, sin esperas</div>
+              <div class="phone-badge-title" data-i18n="badge2.title">Respuesta &lt; 2 seg</div>
+              <div class="phone-badge-sub" data-i18n="badge2.sub">Sin filas, sin esperas</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ MARQUEE / CLIENTS ═══ -->
-    <div class="marquee" id="clients" aria-label="Clientes que confían en Aoki">
+    <!-- ═══ CLIENTS ═══ -->
+    <div class="marquee" id="clients">
       <div class="marquee-head">
-        <span class="eyebrow">+300 Clientes ya confían en nosotros</span>
+        <span class="eyebrow" data-i18n="clients.heading">+300 Clientes ya confían en nosotros</span>
       </div>
       <div class="marquee-strip" aria-hidden="true">
         <div class="marquee-track">
@@ -216,15 +227,14 @@
           <img src="images/tiendanube-logo.png" alt="Tienda Nube" />
           <img src="images/planout-logo-negro-low.png" alt="Planout" />
           <img src="images/hpc-logo-completo-01.jpg" alt="HPC" />
-          <img src="images/logo-color.png" alt="Cliente Aoki" />
+          <img src="images/logo-color.png" alt="" />
           <img src="images/logo-20eurocafe-20png-20ok.webp" alt="Eurocafé" />
           <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="Nescafé Espresso" />
           <img src="images/distri-20nya-20-281-29.png" alt="Distri NYA" />
-          <img src="images/descarga.jpg" alt="Cliente Aoki" />
-          <img src="images/descarga-20-282-29.png" alt="Cliente Aoki" />
-          <img src="images/168121.png" alt="Cliente Aoki" />
-          <img src="images/images-20-284-29.png" alt="Cliente Aoki" />
-          <!-- duplicate for seamless loop -->
+          <img src="images/descarga.jpg" alt="" />
+          <img src="images/descarga-20-282-29.png" alt="" />
+          <img src="images/168121.png" alt="" />
+          <img src="images/images-20-284-29.png" alt="" />
           <img src="images/sancor-salud-portada.jpg" alt="" />
           <img src="images/tiendanube-logo.png" alt="" />
           <img src="images/planout-logo-negro-low.png" alt="" />
@@ -249,9 +259,9 @@
             <img src="images/meta-business-partner.jpeg" alt="Meta Business Partner" />
           </div>
           <div class="partner-text">
-            <span class="eyebrow">Reconocidos por Meta</span>
-            <h2 class="title-lg">Obtuvimos la insignia de <span class="grad-text">Meta Business Partner</span></h2>
-            <p>Un hito que valida nuestra tecnología, nuestro equipo y nuestra visión. Aoki es uno de los pocos partners certificados de WhatsApp Business en Latinoamérica.</p>
+            <span class="eyebrow" data-i18n="partner.eyebrow">Reconocidos por Meta</span>
+            <h2 class="title-lg" data-i18n-html="partner.title">Obtuvimos la insignia de <span class="grad-text">Meta Business Partner</span></h2>
+            <p data-i18n="partner.body">Un hito que valida nuestra tecnología, nuestro equipo y nuestra visión. Aoki es uno de los pocos partners certificados de WhatsApp Business en Latinoamérica.</p>
             <div class="partner-pills">
               <span class="partner-pill">WhatsApp Business API</span>
               <span class="partner-pill">Instagram DMs</span>
@@ -266,118 +276,94 @@
     <section class="caps section" id="features">
       <div class="shell">
         <div class="caps-head reveal">
-          <span class="eyebrow">Todo lo que puede hacer</span>
-          <h2 class="title-xl">Una sola IA que reemplaza<br>a un equipo entero.</h2>
-          <p class="lede" style="margin-top:1.5rem;">Optimizá cada interacción y escalá tu negocio con herramientas diseñadas para crecer sin esfuerzo. Tu Agente IA atiende, vende, agenda y reporta sin que muevas un dedo.</p>
+          <span class="eyebrow" data-i18n="features.eyebrow">Todo lo que puede hacer</span>
+          <h2 class="title-xl" data-i18n-html="features.title">Una sola IA que reemplaza<br>a un equipo entero.</h2>
+          <p class="lede" style="margin-top:1.5rem;" data-i18n="features.lede">Optimizá cada interacción y escalá tu negocio con herramientas diseñadas para crecer sin esfuerzo. Tu Agente IA atiende, vende, agenda y reporta sin que muevas un dedo.</p>
         </div>
 
         <div class="caps-grid reveal-stagger">
           <article class="cap-card">
             <span class="cap-num">01</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3 class="cap-title">Responde 24/7</h3>
-            <p class="cap-desc">Atención inmediata a cualquier hora del día, todos los días del año. Nunca más pierdas un lead por falta de respuesta.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f1.title">Responde 24/7</h3>
+            <p class="cap-desc" data-i18n="features.f1.desc">Atención inmediata a cualquier hora del día, todos los días del año. Nunca más pierdas un lead por falta de respuesta.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">02</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3 class="cap-title">Integración con Tienda Nube</h3>
-            <p class="cap-desc">Conectá tu tienda online y dejá que la IA gestione consultas, stock, envíos y seguimiento de pedidos automáticamente.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f2.title">Integración con Tienda Nube</h3>
+            <p class="cap-desc" data-i18n="features.f2.desc">Conectá tu tienda online y dejá que la IA gestione consultas, stock, envíos y seguimiento de pedidos automáticamente.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">03</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            </div>
-            <h3 class="cap-title">Notificaciones automáticas</h3>
-            <p class="cap-desc">Recibí alertas y reportes en tiempo real sobre el rendimiento de tu agente, conversiones y conversaciones críticas.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f3.title">Notificaciones automáticas</h3>
+            <p class="cap-desc" data-i18n="features.f3.desc">Recibí alertas y reportes en tiempo real sobre el rendimiento de tu agente, conversiones y conversaciones críticas.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">04</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
-            </div>
-            <h3 class="cap-title">Lee y escribe en Google Sheets</h3>
-            <p class="cap-desc">Sincronizá datos automáticamente y actualizá tu base en tiempo real. Tu CRM siempre limpio, sin trabajo manual.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f4.title">Lee y escribe en Google Sheets</h3>
+            <p class="cap-desc" data-i18n="features.f4.desc">Sincronizá datos automáticamente y actualizá tu base en tiempo real. Tu CRM siempre limpio, sin trabajo manual.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">05</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <h3 class="cap-title">Agenda en Google Calendar</h3>
-            <p class="cap-desc">Sincroniza reuniones, recordatorios y citas con tu calendario. Sin doble agenda, sin pisotones, sin olvidos.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f5.title">Agenda en Google Calendar</h3>
+            <p class="cap-desc" data-i18n="features.f5.desc">Sincroniza reuniones, recordatorios y citas con tu calendario. Sin doble agenda, sin pisotones, sin olvidos.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">06</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-            </div>
-            <h3 class="cap-title">Campañas de envíos masivos</h3>
-            <p class="cap-desc">Alcanzá a toda tu audiencia con un solo clic. Promociones, recordatorios, novedades — segmentadas y personalizadas.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f6.title">Campañas de envíos masivos</h3>
+            <p class="cap-desc" data-i18n="features.f6.desc">Alcanzá a toda tu audiencia con un solo clic. Promociones, recordatorios, novedades — segmentadas y personalizadas.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">07</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            </div>
-            <h3 class="cap-title">Métricas claras</h3>
-            <p class="cap-desc">Dashboard con KPIs accionables: tasa de respuesta, conversión, ventas, satisfacción. Decisiones basadas en datos.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f7.title">Métricas claras</h3>
+            <p class="cap-desc" data-i18n="features.f7.desc">Dashboard con KPIs accionables: tasa de respuesta, conversión, ventas, satisfacción. Decisiones basadas en datos.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">08</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            </div>
-            <h3 class="cap-title">Envío de archivos</h3>
-            <p class="cap-desc">Tu agente comparte PDFs, catálogos, fotos y videos al instante. Catálogo siempre a mano, sin intervención humana.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f8.title">Envío de archivos</h3>
+            <p class="cap-desc" data-i18n="features.f8.desc">Tu agente comparte PDFs, catálogos, fotos y videos al instante. Catálogo siempre a mano, sin intervención humana.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">09</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <h3 class="cap-title">Cierra ventas</h3>
-            <p class="cap-desc">Entrenado para acompañar al cliente desde el primer mensaje hasta el pago. Calificá leads y convertí más.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f9.title">Cierra ventas</h3>
+            <p class="cap-desc" data-i18n="features.f9.desc">Entrenado para acompañar al cliente desde el primer mensaje hasta el pago. Calificá leads y convertí más.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">10</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            </div>
-            <h3 class="cap-title">Todos tus chats en un panel</h3>
-            <p class="cap-desc">Unificá WhatsApp, Instagram, Messenger y Webchat en un solo inbox. Tu equipo no se pierde ningún mensaje.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f10.title">Todos tus chats en un panel</h3>
+            <p class="cap-desc" data-i18n="features.f10.desc">Unificá WhatsApp, Instagram, Messenger y Webchat en un solo inbox. Tu equipo no se pierde ningún mensaje.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">11</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            </div>
-            <h3 class="cap-title">Seguimiento automático</h3>
-            <p class="cap-desc">El agente recupera carritos abandonados, reactiva clientes inactivos y hace follow-up sin que lo pidas.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f11.title">Seguimiento automático</h3>
+            <p class="cap-desc" data-i18n="features.f11.desc">El agente recupera carritos abandonados, reactiva clientes inactivos y hace follow-up sin que lo pidas.</p>
           </article>
 
           <article class="cap-card">
             <span class="cap-num">12</span>
-            <div class="cap-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 2 12 12"/></svg>
-            </div>
-            <h3 class="cap-title">Recordatorios automáticos</h3>
-            <p class="cap-desc">Citas, pagos pendientes, renovaciones, eventos. Tu IA recuerda lo que tus clientes olvidan.</p>
+            <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 2 12 12"/></svg></div>
+            <h3 class="cap-title" data-i18n="features.f12.title">Recordatorios automáticos</h3>
+            <p class="cap-desc" data-i18n="features.f12.desc">Citas, pagos pendientes, renovaciones, eventos. Tu IA recuerda lo que tus clientes olvidan.</p>
           </article>
         </div>
       </div>
@@ -388,11 +374,11 @@
       <div class="shell">
         <div class="process-grid">
           <div class="reveal">
-            <span class="eyebrow">Cómo funciona</span>
-            <h2 class="title-xl">Tres pasos<br>para crear<br>tu Agente IA.</h2>
-            <p class="lede" style="margin-top:1.5rem;">Configurá tu Agente IA en minutos y empezá a convertir visitantes en clientes automáticamente. Sin código, sin instalaciones, sin complicaciones.</p>
+            <span class="eyebrow" data-i18n="steps.eyebrow">Cómo funciona</span>
+            <h2 class="title-xl" data-i18n-html="steps.title">Tres pasos<br>para crear<br>tu Agente IA.</h2>
+            <p class="lede" style="margin-top:1.5rem;" data-i18n="steps.lede">Configurá tu Agente IA en minutos y empezá a convertir visitantes en clientes automáticamente. Sin código, sin instalaciones, sin complicaciones.</p>
             <a class="btn btn-primary" href="#contact" style="margin-top:2rem;">
-              Creá tu Agente IA
+              <span data-i18n="steps.cta">Creá tu Agente IA</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
@@ -401,22 +387,22 @@
             <div class="process-step">
               <div class="process-step-num">01</div>
               <div>
-                <div class="process-step-title">Conectalo a tus redes</div>
-                <div class="process-step-desc">Integrá WhatsApp, Instagram y tu sitio web en un solo lugar. Conexión en menos de 5 minutos, sin tocar una sola línea de código.</div>
+                <div class="process-step-title" data-i18n="steps.s1.title">Conectalo a tus redes</div>
+                <div class="process-step-desc" data-i18n="steps.s1.desc">Integrá WhatsApp, Instagram y tu sitio web en un solo lugar. Conexión en menos de 5 minutos, sin tocar una sola línea de código.</div>
               </div>
             </div>
             <div class="process-step">
               <div class="process-step-num">02</div>
               <div>
-                <div class="process-step-title">Dale una personalidad</div>
-                <div class="process-step-desc">Definí su tono, su estilo, sus respuestas. Cargá tu menú, tu catálogo, tus preguntas frecuentes. Hablará como vos, pero mejor.</div>
+                <div class="process-step-title" data-i18n="steps.s2.title">Dale una personalidad</div>
+                <div class="process-step-desc" data-i18n="steps.s2.desc">Definí su tono, su estilo, sus respuestas. Cargá tu menú, tu catálogo, tus preguntas frecuentes. Hablará como vos, pero mejor.</div>
               </div>
             </div>
             <div class="process-step">
               <div class="process-step-num">03</div>
               <div>
-                <div class="process-step-title">Cerrá más ventas</div>
-                <div class="process-step-desc">Entrenalo para vender, para agendar, para cobrar. Mientras dormís, el agente trabaja, califica leads y convierte conversaciones en clientes.</div>
+                <div class="process-step-title" data-i18n="steps.s3.title">Cerrá más ventas</div>
+                <div class="process-step-desc" data-i18n="steps.s3.desc">Entrenalo para vender, para agendar, para cobrar. Mientras dormís, el agente trabaja, califica leads y convierte conversaciones en clientes.</div>
               </div>
             </div>
           </div>
@@ -429,82 +415,80 @@
       <div class="pricing-bg" aria-hidden="true"></div>
       <div class="shell">
         <div class="pricing-head reveal">
-          <span class="eyebrow" style="justify-content:center;">Planes</span>
-          <h2 class="title-xl">Planes que crecen<br>con tu negocio.</h2>
-          <p class="lede" style="margin: 1.5rem auto 0;">Elegí el plan ideal para automatizar tus mensajes y atender más clientes sin esfuerzo. Cancelás cuando quieras.</p>
+          <span class="eyebrow" style="justify-content:center;" data-i18n="pricing.eyebrow">Planes</span>
+          <h2 class="title-xl" data-i18n-html="pricing.title">Planes que crecen<br>con tu negocio.</h2>
+          <p class="lede" style="margin: 1.5rem auto 0;" data-i18n="pricing.lede">Elegí el plan ideal para automatizar tus mensajes y atender más clientes sin esfuerzo. Cancelás cuando quieras.</p>
         </div>
 
         <div class="pricing-grid reveal-stagger">
 
-          <!-- BÁSICO -->
           <article class="plan">
             <div class="plan-head">
-              <div class="plan-name">Básico</div>
-              <div class="plan-desc">Ideal para emprendedores que quieren automatizar tareas y brindar atención rápida.</div>
+              <div class="plan-name" data-i18n="pricing.basic.name">Básico</div>
+              <div class="plan-desc" data-i18n="pricing.basic.desc">Ideal para emprendedores que quieren automatizar tareas y brindar atención rápida.</div>
               <div class="plan-price">
                 <span class="plan-price-num">$80</span>
-                <span class="plan-price-unit">USD / mes</span>
+                <span class="plan-price-unit" data-i18n="pricing.basic.unit">USD / mes</span>
               </div>
             </div>
             <ul class="plan-features">
-              <li><span class="check"></span> 1.000 mensajes / mes</li>
-              <li><span class="check"></span> 1 canal (WhatsApp o Instagram)</li>
-              <li><span class="check"></span> Google Sheets</li>
-              <li><span class="check"></span> Google Calendar</li>
-              <li><span class="cross"></span> Integraciones externas</li>
-              <li><span class="check"></span> Soporte por WhatsApp</li>
-              <li><span class="check"></span> 2 hs de capacitación</li>
+              <li><span class="check"></span> <span data-i18n="pricing.basic.f1">1.000 mensajes / mes</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.basic.f2">1 canal (WhatsApp o Instagram)</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.basic.f3">Google Sheets</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.basic.f4">Google Calendar</span></li>
+              <li><span class="cross"></span> <span data-i18n="pricing.basic.f5">Integraciones externas</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.basic.f6">Soporte por WhatsApp</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.basic.f7">2 hs de capacitación</span></li>
             </ul>
-            <a href="#contact" class="btn btn-ghost plan-cta">Empezar ahora</a>
+            <a href="#contact" class="btn btn-ghost plan-cta" data-i18n="pricing.basic.cta">Empezar ahora</a>
           </article>
 
-          <!-- FULL -->
           <article class="plan plan-popular">
-            <div class="plan-tag">Más popular</div>
+            <div class="plan-watermark" aria-hidden="true"></div>
+            <div class="plan-tag" data-i18n="pricing.full.tag">Más popular</div>
             <div class="plan-head">
-              <div class="plan-name">Full</div>
-              <div class="plan-desc">Para empresas en crecimiento que buscan escalar sin límites y optimizar su rendimiento.</div>
+              <div class="plan-name" data-i18n="pricing.full.name">Full</div>
+              <div class="plan-desc" data-i18n="pricing.full.desc">Para empresas en crecimiento que buscan escalar sin límites y optimizar su rendimiento.</div>
               <div class="plan-price">
                 <span class="plan-price-num">$140</span>
-                <span class="plan-price-unit">USD / mes</span>
+                <span class="plan-price-unit" data-i18n="pricing.full.unit">USD / mes</span>
               </div>
             </div>
             <ul class="plan-features">
-              <li><span class="check"></span> 5.000 mensajes / mes</li>
-              <li><span class="check"></span> 3 canales activos</li>
-              <li><span class="check"></span> Google Sheets</li>
-              <li><span class="check"></span> Google Calendar</li>
-              <li><span class="check"></span> Métricas avanzadas</li>
-              <li><span class="check"></span> Soporte prioritario</li>
-              <li><span class="check"></span> 1 h de capacitación mensual</li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f1">5.000 mensajes / mes</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f2">3 canales activos</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f3">Google Sheets</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f4">Google Calendar</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f5">Métricas avanzadas</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f6">Soporte prioritario</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.full.f7">1 h de capacitación mensual</span></li>
             </ul>
-            <a href="#contact" class="btn btn-primary plan-cta">Empezar ahora</a>
+            <a href="#contact" class="btn btn-primary plan-cta" data-i18n="pricing.full.cta">Empezar ahora</a>
           </article>
 
-          <!-- CUSTOM -->
           <article class="plan">
             <div class="plan-head">
-              <div class="plan-name">Custom</div>
-              <div class="plan-desc">Soluciones a medida para empresas que necesitan máxima personalización e integraciones.</div>
+              <div class="plan-name" data-i18n="pricing.custom.name">Custom</div>
+              <div class="plan-desc" data-i18n="pricing.custom.desc">Soluciones a medida para empresas que necesitan máxima personalización e integraciones.</div>
               <div class="plan-price">
-                <span class="plan-price-num">A medida</span>
-                <span class="plan-price-unit">consultá</span>
+                <span class="plan-price-num" data-i18n="pricing.custom.priceNum">A medida</span>
+                <span class="plan-price-unit" data-i18n="pricing.custom.unit">consultá</span>
               </div>
             </div>
             <ul class="plan-features">
-              <li><span class="check"></span> &gt; 5.000 mensajes / mes</li>
-              <li><span class="check"></span> Más de 3 canales</li>
-              <li><span class="check"></span> Integraciones externas (CRM, ERP)</li>
-              <li><span class="check"></span> Workflows personalizados</li>
-              <li><span class="check"></span> Atención personalizada</li>
-              <li><span class="check"></span> Capacitación a medida</li>
-              <li><span class="check"></span> Dedicated success manager</li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f1">&gt; 5.000 mensajes / mes</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f2">Más de 3 canales</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f3">Integraciones externas (CRM, ERP)</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f4">Workflows personalizados</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f5">Atención personalizada</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f6">Capacitación a medida</span></li>
+              <li><span class="check"></span> <span data-i18n="pricing.custom.f7">Dedicated success manager</span></li>
             </ul>
-            <a href="#contact" class="btn btn-ghost plan-cta">Hablemos</a>
+            <a href="#contact" class="btn btn-ghost plan-cta" data-i18n="pricing.custom.cta">Hablemos</a>
           </article>
 
         </div>
-        <p class="pricing-note">Todos los planes incluyen soporte técnico y actualizaciones gratuitas.</p>
+        <p class="pricing-note" data-i18n="pricing.note">Todos los planes incluyen soporte técnico y actualizaciones gratuitas.</p>
       </div>
     </section>
 
@@ -513,22 +497,22 @@
       <div class="cta-bg" aria-hidden="true"></div>
       <div class="shell cta-shell">
         <div class="cta-content reveal">
-          <span class="eyebrow" style="color:#fff;">Empezá hoy</span>
-          <h2 class="title-xl">¿Listo para transformar la<br>manera en que vendés online?</h2>
-          <p class="lede">Unite a miles de empresas que ya están automatizando sus conversaciones con IA y multiplicando sus ventas. Sin tarjeta. Sin compromiso.</p>
+          <span class="eyebrow eyebrow-light" data-i18n="cta.eyebrow">Empezá hoy</span>
+          <h2 class="title-xl" data-i18n-html="cta.title">¿Listo para transformar la<br>manera en que vendés online?</h2>
+          <p class="lede" data-i18n="cta.lede">Unite a miles de empresas que ya están automatizando sus conversaciones con IA y multiplicando sus ventas. Sin tarjeta. Sin compromiso.</p>
           <form class="cta-form" action="mailto:hola@aokitech.com.ar" method="post" enctype="text/plain">
             <div class="cta-form-row">
-              <input type="text" name="name" placeholder="Tu nombre" required />
-              <input type="email" name="email" placeholder="Email de trabajo" required />
+              <input type="text" name="name" placeholder="Tu nombre" required data-i18n-placeholder="cta.namePh" />
+              <input type="email" name="email" placeholder="Email de trabajo" required data-i18n-placeholder="cta.emailPh" />
               <button type="submit" class="btn btn-light">
-                Probar mi Agente IA
+                <span data-i18n="cta.btn">Probar mi Agente IA</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
             </div>
             <div class="cta-form-foot">
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Setup gratis</span>
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Sin tarjeta</span>
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Cancelás cuando quieras</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="cta.f1">Setup gratis</span></span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="cta.f2">Sin tarjeta</span></span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="cta.f3">Cancelás cuando quieras</span></span>
             </div>
           </form>
         </div>
@@ -545,52 +529,52 @@
           <span class="footer-logo">
             <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" />
           </span>
-          <p>La plataforma líder en automatización conversacional con IA para LATAM. Hacemos que tus conversaciones vendan por vos, 24/7.</p>
+          <p data-i18n="footer.tagline">La plataforma líder en automatización conversacional con IA para LATAM. Hacemos que tus conversaciones vendan por vos, 24/7.</p>
           <div class="footer-providers">
-            <span>IA potenciada por</span>
+            <span data-i18n="footer.providersLabel">IA potenciada por</span>
             <strong>OpenAI · Gemini · xAI</strong>
           </div>
         </div>
 
         <div>
-          <div class="footer-heading">Producto</div>
+          <div class="footer-heading" data-i18n="footer.product">Producto</div>
           <div class="footer-links">
-            <a href="#features">Funciones</a>
-            <a href="#pricing">Precios</a>
-            <a href="#steps">Cómo funciona</a>
-            <a href="#clients">Clientes</a>
+            <a href="#features" data-i18n="footer.p1">Funciones</a>
+            <a href="#pricing" data-i18n="footer.p2">Precios</a>
+            <a href="#steps" data-i18n="footer.p3">Cómo funciona</a>
+            <a href="#clients" data-i18n="footer.p4">Clientes</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-heading">Soporte</div>
+          <div class="footer-heading" data-i18n="footer.support">Soporte</div>
           <div class="footer-links">
-            <a href="#contact">Centro de ayuda</a>
-            <a href="#contact">Contacto</a>
-            <a href="#">Estado del servicio</a>
+            <a href="#contact" data-i18n="footer.s1">Centro de ayuda</a>
+            <a href="#contact" data-i18n="footer.s2">Contacto</a>
+            <a href="#" data-i18n="footer.s3">Estado del servicio</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-heading">Empresa</div>
+          <div class="footer-heading" data-i18n="footer.company">Empresa</div>
           <div class="footer-links">
-            <a href="#partner">Acerca de</a>
-            <a href="#">Blog</a>
-            <a href="#">Bases y condiciones</a>
+            <a href="#partner" data-i18n="footer.c1">Acerca de</a>
+            <a href="#" data-i18n="footer.c2">Blog</a>
+            <a href="#" data-i18n="footer.c3">Bases y condiciones</a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-legal">&copy; <span id="year">2026</span> Aoki Tech. Todos los derechos reservados. · Términos · Privacidad</p>
+        <p class="footer-legal" data-i18n-html="footer.legal">&copy; <span id="year">2026</span> Aoki Tech. Todos los derechos reservados. · Términos · Privacidad</p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/ia.aoki" target="_blank" rel="noopener" aria-label="Instagram @ia.aoki">
+          <a href="https://www.instagram.com/ia.aoki" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn Aoki">
+          <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a href="https://wa.me/5491100000000" target="_blank" rel="noopener" aria-label="WhatsApp Aoki">
+          <a href="https://wa.me/5491100000000" target="_blank" rel="noopener" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .14 5.34.13 11.9a11.83 11.83 0 0 0 1.6 5.96L0 24l6.3-1.66a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.9-5.34 11.9-11.9a11.85 11.85 0 0 0-3.43-8.42zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.27c0-5.45 4.44-9.88 9.9-9.88a9.85 9.85 0 0 1 7 2.9 9.83 9.83 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07a8.13 8.13 0 0 1-2.4-1.48 8.94 8.94 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01a1.1 1.1 0 0 0-.8.37 3.34 3.34 0 0 0-1.04 2.48c0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
           </a>
         </div>
@@ -599,10 +583,12 @@
   </footer>
 
   <!-- Floating WhatsApp button -->
-  <a class="float-wa" href="https://wa.me/5491100000000" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <a class="float-wa" href="https://wa.me/5491100000000" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .14 5.34.13 11.9a11.83 11.83 0 0 0 1.6 5.96L0 24l6.3-1.66a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.9-5.34 11.9-11.9a11.85 11.85 0 0 0-3.43-8.42zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.27c0-5.45 4.44-9.88 9.9-9.88a9.85 9.85 0 0 1 7 2.9 9.83 9.83 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07a8.13 8.13 0 0 1-2.4-1.48 8.94 8.94 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01a1.1 1.1 0 0 0-.8.37 3.34 3.34 0 0 0-1.04 2.48c0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
   </a>
 
-  <script src="js/main.js?v=20260412a"></script>
+  <div class="lang-sweep" aria-hidden="true"></div>
+
+  <script src="js/main.js?v=20260412c"></script>
 </body>
 </html>

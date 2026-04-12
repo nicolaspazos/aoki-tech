@@ -2,7 +2,325 @@
 (function () {
   'use strict';
 
-  /* ============= Header: scroll state ============= */
+  /* ============================================================
+     i18n — Spanish (source) + English
+     ============================================================ */
+  const TRANS = {
+    es: {
+      'nav.steps': 'Cómo funciona',
+      'nav.clients': 'Clientes',
+      'nav.pricing': 'Precios',
+      'nav.login': 'Iniciar sesión',
+      'nav.demo': 'Agendá una demo',
+      'nav.cta': 'Creá tu Agente IA',
+
+      'hero.eyebrow': 'Meta Business Partner · Powered by GPT & Gemini',
+      'hero.title': '<span class="row"><span class="word">Tu <span class="accent">agente de IA</span></span></span><span class="row"><span class="word">que vende</span></span><span class="row"><span class="word">por vos <span class="accent-alt">24/7.</span></span></span>',
+      'hero.lede': 'Automatizá conversaciones por WhatsApp e Instagram, agendá reuniones, enviá archivos y cerrá ventas mientras dormís. Entrenado para tu negocio en minutos, sin código.',
+      'hero.cta1': 'Probalo Gratis',
+      'hero.cta2': 'Ver funciones',
+      'hero.stat1Label': 'Horas ahorradas',
+      'hero.stat2Label': 'Más facturación',
+      'hero.stat3Label': 'Atención sin pausa',
+
+      'chat.title': 'Aoki · La Primera Café',
+      'chat.status': 'En línea · Agente IA',
+      'chat.b1': 'Hola! Quiero el menú del día 🍽️',
+      'chat.b2': '¡Hola! Por supuesto, te paso el menú de hoy 👇',
+      'chat.fileName': 'Menú-Almuerzo.pdf',
+      'chat.fileMeta': '128 KB · PDF',
+      'chat.b3': '¿Lo preparan para retirar?',
+      'chat.b4': '¡Dale! ¿Para qué hora lo querés? Tenemos turnos desde las 12:00 🕛',
+      'chat.input': 'Escribí un mensaje…',
+
+      'badge1.title': 'Respuestas automáticas',
+      'badge1.sub': '98.5% resueltas por IA',
+      'badge2.title': 'Respuesta < 2 seg',
+      'badge2.sub': 'Sin filas, sin esperas',
+
+      'clients.heading': '+300 Clientes ya confían en nosotros',
+
+      'partner.eyebrow': 'Reconocidos por Meta',
+      'partner.title': 'Obtuvimos la insignia de <span class="grad-text">Meta Business Partner</span>',
+      'partner.body': 'Un hito que valida nuestra tecnología, nuestro equipo y nuestra visión. Aoki es uno de los pocos partners certificados de WhatsApp Business en Latinoamérica.',
+
+      'features.eyebrow': 'Todo lo que puede hacer',
+      'features.title': 'Una sola IA que reemplaza<br>a un equipo entero.',
+      'features.lede': 'Optimizá cada interacción y escalá tu negocio con herramientas diseñadas para crecer sin esfuerzo. Tu Agente IA atiende, vende, agenda y reporta sin que muevas un dedo.',
+      'features.f1.title': 'Responde 24/7',
+      'features.f1.desc': 'Atención inmediata a cualquier hora del día, todos los días del año. Nunca más pierdas un lead por falta de respuesta.',
+      'features.f2.title': 'Integración con Tienda Nube',
+      'features.f2.desc': 'Conectá tu tienda online y dejá que la IA gestione consultas, stock, envíos y seguimiento de pedidos automáticamente.',
+      'features.f3.title': 'Notificaciones automáticas',
+      'features.f3.desc': 'Recibí alertas y reportes en tiempo real sobre el rendimiento de tu agente, conversiones y conversaciones críticas.',
+      'features.f4.title': 'Lee y escribe en Google Sheets',
+      'features.f4.desc': 'Sincronizá datos automáticamente y actualizá tu base en tiempo real. Tu CRM siempre limpio, sin trabajo manual.',
+      'features.f5.title': 'Agenda en Google Calendar',
+      'features.f5.desc': 'Sincroniza reuniones, recordatorios y citas con tu calendario. Sin doble agenda, sin pisotones, sin olvidos.',
+      'features.f6.title': 'Campañas de envíos masivos',
+      'features.f6.desc': 'Alcanzá a toda tu audiencia con un solo clic. Promociones, recordatorios, novedades — segmentadas y personalizadas.',
+      'features.f7.title': 'Métricas claras',
+      'features.f7.desc': 'Dashboard con KPIs accionables: tasa de respuesta, conversión, ventas, satisfacción. Decisiones basadas en datos.',
+      'features.f8.title': 'Envío de archivos',
+      'features.f8.desc': 'Tu agente comparte PDFs, catálogos, fotos y videos al instante. Catálogo siempre a mano, sin intervención humana.',
+      'features.f9.title': 'Cierra ventas',
+      'features.f9.desc': 'Entrenado para acompañar al cliente desde el primer mensaje hasta el pago. Calificá leads y convertí más.',
+      'features.f10.title': 'Todos tus chats en un panel',
+      'features.f10.desc': 'Unificá WhatsApp, Instagram, Messenger y Webchat en un solo inbox. Tu equipo no se pierde ningún mensaje.',
+      'features.f11.title': 'Seguimiento automático',
+      'features.f11.desc': 'El agente recupera carritos abandonados, reactiva clientes inactivos y hace follow-up sin que lo pidas.',
+      'features.f12.title': 'Recordatorios automáticos',
+      'features.f12.desc': 'Citas, pagos pendientes, renovaciones, eventos. Tu IA recuerda lo que tus clientes olvidan.',
+
+      'steps.eyebrow': 'Cómo funciona',
+      'steps.title': 'Tres pasos<br>para crear<br>tu Agente IA.',
+      'steps.lede': 'Configurá tu Agente IA en minutos y empezá a convertir visitantes en clientes automáticamente. Sin código, sin instalaciones, sin complicaciones.',
+      'steps.cta': 'Creá tu Agente IA',
+      'steps.s1.title': 'Conectalo a tus redes',
+      'steps.s1.desc': 'Integrá WhatsApp, Instagram y tu sitio web en un solo lugar. Conexión en menos de 5 minutos, sin tocar una sola línea de código.',
+      'steps.s2.title': 'Dale una personalidad',
+      'steps.s2.desc': 'Definí su tono, su estilo, sus respuestas. Cargá tu menú, tu catálogo, tus preguntas frecuentes. Hablará como vos, pero mejor.',
+      'steps.s3.title': 'Cerrá más ventas',
+      'steps.s3.desc': 'Entrenalo para vender, para agendar, para cobrar. Mientras dormís, el agente trabaja, califica leads y convierte conversaciones en clientes.',
+
+      'pricing.eyebrow': 'Planes',
+      'pricing.title': 'Planes que crecen<br>con tu negocio.',
+      'pricing.lede': 'Elegí el plan ideal para automatizar tus mensajes y atender más clientes sin esfuerzo. Cancelás cuando quieras.',
+      'pricing.basic.name': 'Básico',
+      'pricing.basic.desc': 'Ideal para emprendedores que quieren automatizar tareas y brindar atención rápida.',
+      'pricing.basic.unit': 'USD / mes',
+      'pricing.basic.f1': '1.000 mensajes / mes',
+      'pricing.basic.f2': '1 canal (WhatsApp o Instagram)',
+      'pricing.basic.f3': 'Google Sheets',
+      'pricing.basic.f4': 'Google Calendar',
+      'pricing.basic.f5': 'Integraciones externas',
+      'pricing.basic.f6': 'Soporte por WhatsApp',
+      'pricing.basic.f7': '2 hs de capacitación',
+      'pricing.basic.cta': 'Empezar ahora',
+      'pricing.full.tag': 'Más popular',
+      'pricing.full.name': 'Full',
+      'pricing.full.desc': 'Para empresas en crecimiento que buscan escalar sin límites y optimizar su rendimiento.',
+      'pricing.full.unit': 'USD / mes',
+      'pricing.full.f1': '5.000 mensajes / mes',
+      'pricing.full.f2': '3 canales activos',
+      'pricing.full.f3': 'Google Sheets',
+      'pricing.full.f4': 'Google Calendar',
+      'pricing.full.f5': 'Métricas avanzadas',
+      'pricing.full.f6': 'Soporte prioritario',
+      'pricing.full.f7': '1 h de capacitación mensual',
+      'pricing.full.cta': 'Empezar ahora',
+      'pricing.custom.name': 'Custom',
+      'pricing.custom.desc': 'Soluciones a medida para empresas que necesitan máxima personalización e integraciones.',
+      'pricing.custom.priceNum': 'A medida',
+      'pricing.custom.unit': 'consultá',
+      'pricing.custom.f1': '> 5.000 mensajes / mes',
+      'pricing.custom.f2': 'Más de 3 canales',
+      'pricing.custom.f3': 'Integraciones externas (CRM, ERP)',
+      'pricing.custom.f4': 'Workflows personalizados',
+      'pricing.custom.f5': 'Atención personalizada',
+      'pricing.custom.f6': 'Capacitación a medida',
+      'pricing.custom.f7': 'Success manager dedicado',
+      'pricing.custom.cta': 'Hablemos',
+      'pricing.note': 'Todos los planes incluyen soporte técnico y actualizaciones gratuitas.',
+
+      'cta.eyebrow': 'Empezá hoy',
+      'cta.title': '¿Listo para transformar la<br>manera en que vendés online?',
+      'cta.lede': 'Unite a miles de empresas que ya están automatizando sus conversaciones con IA y multiplicando sus ventas. Sin tarjeta. Sin compromiso.',
+      'cta.namePh': 'Tu nombre',
+      'cta.emailPh': 'Email de trabajo',
+      'cta.btn': 'Probar mi Agente IA',
+      'cta.f1': 'Setup gratis',
+      'cta.f2': 'Sin tarjeta',
+      'cta.f3': 'Cancelás cuando quieras',
+
+      'footer.tagline': 'La plataforma líder en automatización conversacional con IA para LATAM. Hacemos que tus conversaciones vendan por vos, 24/7.',
+      'footer.providersLabel': 'IA potenciada por',
+      'footer.product': 'Producto',
+      'footer.support': 'Soporte',
+      'footer.company': 'Empresa',
+      'footer.p1': 'Funciones',
+      'footer.p2': 'Precios',
+      'footer.p3': 'Cómo funciona',
+      'footer.p4': 'Clientes',
+      'footer.s1': 'Centro de ayuda',
+      'footer.s2': 'Contacto',
+      'footer.s3': 'Estado del servicio',
+      'footer.c1': 'Acerca de',
+      'footer.c2': 'Blog',
+      'footer.c3': 'Bases y condiciones',
+      'footer.legal': '© <span id="year"></span> Aoki Tech. Todos los derechos reservados. · Términos · Privacidad'
+    },
+
+    en: {
+      'nav.steps': 'How it works',
+      'nav.clients': 'Clients',
+      'nav.pricing': 'Pricing',
+      'nav.login': 'Log in',
+      'nav.demo': 'Book a demo',
+      'nav.cta': 'Create your AI Agent',
+
+      'hero.eyebrow': 'Meta Business Partner · Powered by GPT & Gemini',
+      'hero.title': '<span class="row"><span class="word">Your <span class="accent">AI agent</span></span></span><span class="row"><span class="word">that sells</span></span><span class="row"><span class="word">for you <span class="accent-alt">24/7.</span></span></span>',
+      'hero.lede': 'Automate conversations on WhatsApp and Instagram, book meetings, send files and close sales while you sleep. Trained for your business in minutes, no code required.',
+      'hero.cta1': 'Try it Free',
+      'hero.cta2': 'See features',
+      'hero.stat1Label': 'Hours saved',
+      'hero.stat2Label': 'More revenue',
+      'hero.stat3Label': 'Always on',
+
+      'chat.title': 'Aoki · La Primera Café',
+      'chat.status': 'Online · AI Agent',
+      'chat.b1': "Hi! I'd like today's menu 🍽️",
+      'chat.b2': "Hi there! Sure, here's today's menu 👇",
+      'chat.fileName': 'Lunch-Menu.pdf',
+      'chat.fileMeta': '128 KB · PDF',
+      'chat.b3': 'Can you have it ready for pickup?',
+      'chat.b4': 'Of course! What time would you like? Slots available from 12:00 🕛',
+      'chat.input': 'Type a message…',
+
+      'badge1.title': 'Automated replies',
+      'badge1.sub': '98.5% resolved by AI',
+      'badge2.title': 'Reply in < 2 sec',
+      'badge2.sub': 'No queues, no waits',
+
+      'clients.heading': '+300 Clients already trust us',
+
+      'partner.eyebrow': 'Recognized by Meta',
+      'partner.title': 'We earned the <span class="grad-text">Meta Business Partner</span> badge',
+      'partner.body': 'A milestone that validates our technology, our team and our vision. Aoki is one of the few certified WhatsApp Business partners in Latin America.',
+
+      'features.eyebrow': 'Everything it can do',
+      'features.title': 'One AI that replaces<br>an entire team.',
+      'features.lede': "Optimize every interaction and scale your business with tools designed for effortless growth. Your AI Agent answers, sells, schedules and reports — without you lifting a finger.",
+      'features.f1.title': 'Replies 24/7',
+      'features.f1.desc': 'Instant attention at any hour, every day of the year. Never lose a lead because nobody answered.',
+      'features.f2.title': 'Tienda Nube integration',
+      'features.f2.desc': 'Connect your online store and let the AI handle inquiries, stock, shipping and order tracking automatically.',
+      'features.f3.title': 'Automated notifications',
+      'features.f3.desc': "Get real-time alerts and reports on your agent's performance, conversions and critical conversations.",
+      'features.f4.title': 'Reads & writes Google Sheets',
+      'features.f4.desc': 'Sync data automatically and update your records in real time. Your CRM always clean, with no manual work.',
+      'features.f5.title': 'Books in Google Calendar',
+      'features.f5.desc': 'Sync meetings, reminders and appointments with your calendar. No double bookings, no clashes, no forgotten dates.',
+      'features.f6.title': 'Mass-message campaigns',
+      'features.f6.desc': 'Reach your entire audience with a single click. Promotions, reminders, news — segmented and personalized.',
+      'features.f7.title': 'Clear metrics',
+      'features.f7.desc': 'Dashboard with actionable KPIs: response rate, conversion, sales, satisfaction. Data-driven decisions.',
+      'features.f8.title': 'File sharing',
+      'features.f8.desc': 'Your agent shares PDFs, catalogs, photos and videos instantly. Catalog always at hand, no human intervention.',
+      'features.f9.title': 'Closes sales',
+      'features.f9.desc': 'Trained to walk customers from first message to checkout. Qualify leads and convert more.',
+      'features.f10.title': 'All chats in one inbox',
+      'features.f10.desc': 'Unify WhatsApp, Instagram, Messenger and Web chat in a single inbox. Your team never misses a message.',
+      'features.f11.title': 'Automatic follow-up',
+      'features.f11.desc': 'The agent recovers abandoned carts, re-activates inactive customers and follows up without you asking.',
+      'features.f12.title': 'Automatic reminders',
+      'features.f12.desc': 'Appointments, pending payments, renewals, events. Your AI remembers what your customers forget.',
+
+      'steps.eyebrow': 'How it works',
+      'steps.title': 'Three steps<br>to create<br>your AI Agent.',
+      'steps.lede': 'Set up your AI Agent in minutes and start converting visitors into customers automatically. No code, no installs, no headaches.',
+      'steps.cta': 'Create your AI Agent',
+      'steps.s1.title': 'Connect your channels',
+      'steps.s1.desc': 'Integrate WhatsApp, Instagram and your website in one place. Connection in less than 5 minutes, without touching a single line of code.',
+      'steps.s2.title': 'Give it a personality',
+      'steps.s2.desc': 'Define its tone, its style, its replies. Upload your menu, your catalog, your FAQs. It will speak like you, but better.',
+      'steps.s3.title': 'Close more sales',
+      'steps.s3.desc': 'Train it to sell, to schedule, to charge. While you sleep, the agent works, qualifies leads and turns conversations into customers.',
+
+      'pricing.eyebrow': 'Plans',
+      'pricing.title': 'Plans that grow<br>with your business.',
+      'pricing.lede': 'Pick the plan that automates your messages and lets you serve more customers without effort. Cancel anytime.',
+      'pricing.basic.name': 'Basic',
+      'pricing.basic.desc': 'Perfect for entrepreneurs who want to automate tasks and offer fast support.',
+      'pricing.basic.unit': 'USD / month',
+      'pricing.basic.f1': '1,000 messages / month',
+      'pricing.basic.f2': '1 channel (WhatsApp or Instagram)',
+      'pricing.basic.f3': 'Google Sheets',
+      'pricing.basic.f4': 'Google Calendar',
+      'pricing.basic.f5': 'External integrations',
+      'pricing.basic.f6': 'WhatsApp support',
+      'pricing.basic.f7': '2 hours of training',
+      'pricing.basic.cta': 'Start now',
+      'pricing.full.tag': 'Most popular',
+      'pricing.full.name': 'Full',
+      'pricing.full.desc': 'For growing companies that want to scale without limits and optimize their performance.',
+      'pricing.full.unit': 'USD / month',
+      'pricing.full.f1': '5,000 messages / month',
+      'pricing.full.f2': '3 active channels',
+      'pricing.full.f3': 'Google Sheets',
+      'pricing.full.f4': 'Google Calendar',
+      'pricing.full.f5': 'Advanced metrics',
+      'pricing.full.f6': 'Priority support',
+      'pricing.full.f7': '1 hour of training per month',
+      'pricing.full.cta': 'Start now',
+      'pricing.custom.name': 'Custom',
+      'pricing.custom.desc': 'Tailor-made solutions for businesses that need maximum personalization and integrations.',
+      'pricing.custom.priceNum': 'Custom',
+      'pricing.custom.unit': "let's talk",
+      'pricing.custom.f1': '> 5,000 messages / month',
+      'pricing.custom.f2': 'More than 3 channels',
+      'pricing.custom.f3': 'External integrations (CRM, ERP)',
+      'pricing.custom.f4': 'Custom workflows',
+      'pricing.custom.f5': 'White-glove support',
+      'pricing.custom.f6': 'Tailored training',
+      'pricing.custom.f7': 'Dedicated success manager',
+      'pricing.custom.cta': "Let's talk",
+      'pricing.note': 'Every plan includes technical support and free updates.',
+
+      'cta.eyebrow': 'Start today',
+      'cta.title': 'Ready to transform how<br>you sell online?',
+      'cta.lede': 'Join thousands of companies already automating their conversations with AI and multiplying their sales. No card. No commitment.',
+      'cta.namePh': 'Your name',
+      'cta.emailPh': 'Work email',
+      'cta.btn': 'Try my AI Agent',
+      'cta.f1': 'Free setup',
+      'cta.f2': 'No card',
+      'cta.f3': 'Cancel anytime',
+
+      'footer.tagline': "Latin America's leading platform for AI-powered conversational automation. We make your conversations sell for you, 24/7.",
+      'footer.providersLabel': 'AI powered by',
+      'footer.product': 'Product',
+      'footer.support': 'Support',
+      'footer.company': 'Company',
+      'footer.p1': 'Features',
+      'footer.p2': 'Pricing',
+      'footer.p3': 'How it works',
+      'footer.p4': 'Clients',
+      'footer.s1': 'Help center',
+      'footer.s2': 'Contact',
+      'footer.s3': 'Service status',
+      'footer.c1': 'About',
+      'footer.c2': 'Blog',
+      'footer.c3': 'Terms & conditions',
+      'footer.legal': '© <span id="year"></span> Aoki Tech. All rights reserved. · Terms · Privacy'
+    }
+  };
+
+  function applyLang(lang) {
+    const dict = TRANS[lang];
+    if (!dict) return;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.dataset.i18n;
+      if (dict[k] !== undefined) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.dataset.i18nHtml;
+      if (dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const k = el.dataset.i18nPlaceholder;
+      if (dict[k] !== undefined) el.placeholder = dict[k];
+    });
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  }
+
+  /* ============================================================
+     Header: scroll state
+     ============================================================ */
   const header = document.getElementById('site-header');
   let ticking = false;
   const onScroll = () => {
@@ -16,7 +334,9 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ============= Mobile nav toggle ============= */
+  /* ============================================================
+     Mobile nav toggle
+     ============================================================ */
   const navToggle = document.getElementById('nav-toggle');
   const nav = document.getElementById('primary-nav');
   if (navToggle && nav) {
@@ -36,7 +356,9 @@
     });
   }
 
-  /* ============= Reveal on scroll ============= */
+  /* ============================================================
+     Reveal on scroll
+     ============================================================ */
   const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -52,9 +374,10 @@
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
-  /* ============= Capability card spotlight ============= */
-  const capCards = document.querySelectorAll('.cap-card');
-  capCards.forEach(card => {
+  /* ============================================================
+     Capability card spotlight
+     ============================================================ */
+  document.querySelectorAll('.cap-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -64,7 +387,9 @@
     });
   });
 
-  /* ============= Count-up stats ============= */
+  /* ============================================================
+     Count-up stats
+     ============================================================ */
   const counters = document.querySelectorAll('[data-count]');
   if ('IntersectionObserver' in window && counters.length) {
     const co = new IntersectionObserver((entries) => {
@@ -73,7 +398,7 @@
         const el = entry.target;
         const target = parseInt(el.dataset.count, 10) || 0;
         const suffix = el.dataset.suffix || '';
-        const prefix = el.textContent.startsWith('+') ? '+' : '';
+        const prefix = el.textContent.trim().startsWith('+') ? '+' : '';
         const duration = 1600;
         const start = performance.now();
         const tick = (now) => {
@@ -89,7 +414,9 @@
     counters.forEach(c => co.observe(c));
   }
 
-  /* ============= 3D mouse tilt (reusable) ============= */
+  /* ============================================================
+     3D mouse tilt (phone)
+     ============================================================ */
   function attachTilt(el, maxTilt) {
     if (!el) return;
     let raf = null;
@@ -112,11 +439,11 @@
       el.style.setProperty('--ry', '0deg');
     });
   }
-
-  // Phone gets a subtle tilt
   attachTilt(document.querySelector('.phone-frame'), 5);
 
-  /* ============= Theme toggle ============= */
+  /* ============================================================
+     Theme toggle
+     ============================================================ */
   const themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
     const root = document.documentElement;
@@ -132,27 +459,70 @@
     });
   }
 
-  /* ============= Chat replay loop ============= */
+  /* ============================================================
+     Language toggle
+     ============================================================ */
+  const langToggle = document.getElementById('lang-toggle');
+
+  function setLang(lang, animate) {
+    const root = document.documentElement;
+    if (root.dataset.lang === lang && animate) return;
+    if (langToggle) langToggle.dataset.active = lang;
+
+    if (!animate) {
+      applyLang(lang);
+      return;
+    }
+    root.classList.add('lang-switching');
+    setTimeout(() => {
+      applyLang(lang);
+      try { localStorage.setItem('aoki-lang', lang); } catch (e) {}
+    }, 320);
+    setTimeout(() => {
+      root.classList.remove('lang-switching');
+    }, 360);
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener('click', () => {
+      const current = document.documentElement.dataset.lang || 'es';
+      setLang(current === 'es' ? 'en' : 'es', true);
+    });
+  }
+
+  // Initial language: from localStorage (set by bootstrap script) or default 'es'
+  let initialLang = 'es';
+  try {
+    const stored = localStorage.getItem('aoki-lang');
+    if (stored === 'en' || stored === 'es') initialLang = stored;
+  } catch (e) {}
+  setLang(initialLang, false);
+
+  /* ============================================================
+     Chat replay loop
+     ============================================================ */
   const chatBody = document.getElementById('chat-body');
   if (chatBody) {
     const bubbles = chatBody.querySelectorAll('.bubble');
     const replay = () => {
       bubbles.forEach(b => {
         b.style.animation = 'none';
-        // force reflow
         void b.offsetWidth;
         b.style.animation = '';
       });
     };
-    // Replay every ~10s after the initial intro
     setInterval(replay, 12000);
   }
 
-  /* ============= Footer year ============= */
+  /* ============================================================
+     Footer year (also re-set after lang switch)
+     ============================================================ */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ============= Smooth anchor offset ============= */
+  /* ============================================================
+     Smooth anchor scroll
+     ============================================================ */
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href');
@@ -160,7 +530,7 @@
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - 90;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
