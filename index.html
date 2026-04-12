@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://aokitech.com.ar/" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="Aoki Tech" />
-  <meta property="og:image" content="https://aokitech.com.ar/aoki-logo.png" />
+  <meta property="og:image" content="https://aokitech.com.ar/aoki-logo.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
 
@@ -36,7 +36,7 @@
         "@id": "https://aokitech.com.ar/#org",
         "name": "Aoki Tech",
         "url": "https://aokitech.com.ar/",
-        "logo": "https://aokitech.com.ar/aoki-logo.png",
+        "logo": "https://aokitech.com.ar/aoki-logo.webp",
         "sameAs": [
           "https://www.instagram.com/ia.aoki",
           "https://www.linkedin.com/company/aoki-chatbot-ia"
@@ -46,32 +46,16 @@
   }
   </script>
 
-  <!-- Fonts (non-blocking) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Public+Sans:wght@500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Public+Sans:wght@500;600;700;800;900&display=swap" /></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Public+Sans:wght@500;600;700;800;900&display=swap" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20260412i" />
+  <link rel="stylesheet" href="css/styles.css?v=20260412k" />
   <link rel="icon" href="aoki-favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="aoki-favicon.png" />
 
   <!-- Theme + Lang bootstrap (prevents FOUC) -->
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('aoki-theme');
-        document.documentElement.setAttribute('data-theme', t || 'light');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
-      try {
-        var l = localStorage.getItem('aoki-lang');
-        if (l === 'en' || l === 'es') {
-          document.documentElement.lang = l;
-          document.documentElement.dataset.lang = l;
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <script src="js/bootstrap.js?v=20260412k"></script>
 </head>
 <body>
 
@@ -79,7 +63,7 @@
   <header class="site-header" id="site-header">
     <div class="shell header-inner">
       <a class="brand-mark" href="/" aria-label="Aoki Tech">
-        <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" fetchpriority="high" decoding="async" data-logo-swap data-logo-es="aoki-logo.png" data-logo-en="aoki-logo-en.png" />
+        <img src="aoki-logo.webp" alt="Aoki Tech" width="200" height="56" fetchpriority="high" decoding="async" data-logo-swap data-logo-es="aoki-logo.webp" data-logo-en="aoki-logo-en.webp" />
       </a>
       <nav class="nav" id="primary-nav" aria-label="Principal">
         <button class="nav-close" aria-label="Cerrar menú">
@@ -180,7 +164,7 @@
             <div class="phone-screen">
               <div class="chat-header">
                 <div class="chat-avatar chat-avatar-photo">
-                  <img src="images/coffee-avatar.jpg" alt="La Primera Café" />
+                  <img src="images/coffee-avatar.webp" alt="La Primera Café" />
                 </div>
                 <div>
                   <div class="chat-title">La Primera Café</div>
@@ -224,30 +208,30 @@
       </div>
       <div class="marquee-strip" aria-hidden="true">
         <div class="marquee-track">
-          <img src="images/sancor-salud-portada.jpg" alt="Sancor Salud" width="75" height="50" loading="lazy" decoding="async" />
-          <img src="images/tiendanube-logo.png" alt="Tienda Nube" width="67" height="50" loading="lazy" decoding="async" />
+          <img src="images/sancor-salud-portada.webp" alt="Sancor Salud" width="75" height="50" loading="lazy" decoding="async" />
+          <img src="images/tiendanube-logo.webp" alt="Tienda Nube" width="67" height="50" loading="lazy" decoding="async" />
           <img src="images/planout-logo-negro-low.png" alt="Planout" width="140" height="50" loading="lazy" decoding="async" />
-          <img src="images/hpc-logo-completo-01.jpg" alt="HPC" width="83" height="50" loading="lazy" decoding="async" />
-          <img src="images/logo-color.png" alt="" width="76" height="50" loading="lazy" decoding="async" />
+          <img src="images/hpc-logo-completo-01.webp" alt="HPC" width="83" height="50" loading="lazy" decoding="async" />
+          <img src="images/logo-color.webp" alt="" width="76" height="50" loading="lazy" decoding="async" />
           <img src="images/logo-20eurocafe-20png-20ok.webp" alt="Eurocafé" width="140" height="50" loading="lazy" decoding="async" />
           <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="Nescafé Espresso" width="66" height="50" loading="lazy" decoding="async" />
-          <img src="images/distri-20nya-20-281-29.png" alt="Distri NYA" width="160" height="50" loading="lazy" decoding="async" />
-          <img src="images/descarga.jpg" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/descarga-20-282-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/168121.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/images-20-284-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/sancor-salud-portada.jpg" alt="" width="75" height="50" loading="lazy" decoding="async" />
-          <img src="images/tiendanube-logo.png" alt="" width="67" height="50" loading="lazy" decoding="async" />
+          <img src="images/distri-20nya-20-281-29.webp" alt="Distri NYA" width="160" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga-20-282-29.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/168121.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/images-20-284-29.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/sancor-salud-portada.webp" alt="" width="75" height="50" loading="lazy" decoding="async" />
+          <img src="images/tiendanube-logo.webp" alt="" width="67" height="50" loading="lazy" decoding="async" />
           <img src="images/planout-logo-negro-low.png" alt="" width="140" height="50" loading="lazy" decoding="async" />
-          <img src="images/hpc-logo-completo-01.jpg" alt="" width="83" height="50" loading="lazy" decoding="async" />
-          <img src="images/logo-color.png" alt="" width="76" height="50" loading="lazy" decoding="async" />
+          <img src="images/hpc-logo-completo-01.webp" alt="" width="83" height="50" loading="lazy" decoding="async" />
+          <img src="images/logo-color.webp" alt="" width="76" height="50" loading="lazy" decoding="async" />
           <img src="images/logo-20eurocafe-20png-20ok.webp" alt="" width="140" height="50" loading="lazy" decoding="async" />
           <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="" width="66" height="50" loading="lazy" decoding="async" />
-          <img src="images/distri-20nya-20-281-29.png" alt="" width="160" height="50" loading="lazy" decoding="async" />
-          <img src="images/descarga.jpg" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/descarga-20-282-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/168121.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
-          <img src="images/images-20-284-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/distri-20nya-20-281-29.webp" alt="" width="160" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga-20-282-29.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/168121.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/images-20-284-29.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -257,7 +241,7 @@
       <div class="shell">
         <div class="partner-card reveal">
           <div class="partner-badge">
-            <img src="images/meta-business-partner.jpeg" alt="Meta Business Partner" width="396" height="231" loading="lazy" decoding="async" />
+            <img src="images/meta-business-partner.webp" alt="Meta Business Partner" width="396" height="231" loading="lazy" decoding="async" />
           </div>
           <div class="partner-text">
             <span class="eyebrow" data-i18n="partner.eyebrow">Reconocidos por Meta</span>
@@ -501,7 +485,7 @@
           <span class="eyebrow eyebrow-light" data-i18n="cta.eyebrow">Empezá hoy</span>
           <h2 class="title-xl" data-i18n-html="cta.title">¿Listo para transformar la<br>manera en que vendés online?</h2>
           <p class="lede" data-i18n="cta.lede">Unite a miles de empresas que ya están automatizando sus conversaciones con IA y multiplicando sus ventas. Sin tarjeta. Sin compromiso.</p>
-          <form class="cta-form" action="mailto:hola@aokitech.com.ar" method="post" enctype="text/plain">
+          <form class="cta-form" id="cta-form" data-mail="hola@aokitech.com.ar" novalidate>
             <div class="cta-form-row">
               <input type="text" name="name" placeholder="Tu nombre" required data-i18n-placeholder="cta.namePh" />
               <input type="email" name="email" placeholder="Email de trabajo" required data-i18n-placeholder="cta.emailPh" />
@@ -528,7 +512,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <span class="footer-logo">
-            <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" loading="lazy" decoding="async" data-logo-swap data-logo-es="aoki-logo.png" data-logo-en="aoki-logo-en.png" />
+            <img src="aoki-logo.webp" alt="Aoki Tech" width="200" height="56" loading="lazy" decoding="async" data-logo-swap data-logo-es="aoki-logo.webp" data-logo-en="aoki-logo-en.webp" />
           </span>
           <p data-i18n="footer.tagline">La plataforma líder en automatización conversacional con IA para LATAM. Hacemos que tus conversaciones vendan por vos, 24/7.</p>
           <div class="footer-providers">
@@ -594,6 +578,6 @@
     <span class="lang-sweep-stripe lang-sweep-stripe-3"></span>
   </div>
 
-  <script src="js/main.js?v=20260412i"></script>
+  <script src="js/main.js?v=20260412k"></script>
 </body>
 </html>

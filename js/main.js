@@ -297,7 +297,7 @@
      ============================================================ */
   const CHATS = {
     whatsapp: {
-      avatar: 'images/coffee-avatar.jpg',
+      avatar: 'images/coffee-avatar.webp',
       title: 'La Primera Café',
       es: {
         status: 'En línea · Agente IA',
@@ -325,7 +325,7 @@
       }
     },
     instagram: {
-      avatar: 'images/tienda-ropa.png',
+      avatar: 'images/tienda-ropa.webp',
       title: 'RopaYa',
       es: {
         status: 'Activa ahora · Agente IA',
@@ -502,25 +502,19 @@
   }
 
   /* ============================================================
-     Header: scroll state
+     Header: scroll state (via IntersectionObserver sentinel — zero
+     scroll-handler reflows)
      ============================================================ */
   const header = document.getElementById('site-header');
-  let ticking = false;
-  let headerScrolled = false;
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const next = window.scrollY > 40;
-      if (header && next !== headerScrolled) {
-        header.classList.toggle('is-scrolled', next);
-        headerScrolled = next;
-      }
-      ticking = false;
-    });
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  if (header && 'IntersectionObserver' in window) {
+    const sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:40px;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.prepend(sentinel);
+    new IntersectionObserver((entries) => {
+      header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+  }
 
   /* ============================================================
      Mobile nav toggle
