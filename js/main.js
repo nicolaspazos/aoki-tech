@@ -464,30 +464,50 @@
      ============================================================ */
   const langToggle = document.getElementById('lang-toggle');
 
+  let langSwitchBusy = false;
   function setLang(lang, animate) {
     const root = document.documentElement;
     if (root.dataset.lang === lang && animate) return;
+    if (langSwitchBusy && animate) return; // ignore rapid re-clicks
     if (langToggle) langToggle.dataset.active = lang;
 
     if (!animate) {
       applyLang(lang);
       return;
     }
-    // Set the target-lang attr first so the colored ribbons read the right palette
+
+    langSwitchBusy = true;
+
+    // Reset any in-flight ribbons by clearing the class first
+    root.classList.remove('lang-running');
+    delete root.dataset.switchingTo;
+    // Force reflow so the next class addition restarts CSS animations cleanly
+    void root.offsetWidth;
+
+    // Now set the target-lang palette attr and the running class — both stay on
+    // for the FULL duration of the ribbon animation (1.4s)
     root.dataset.switchingTo = lang;
-    // Force a reflow so the freshly-set attribute applies before the animation class
     void root.offsetWidth;
     root.classList.add('lang-switching');
+    root.classList.add('lang-running');
+
+    // Mid-animation: swap the page text
     setTimeout(() => {
       applyLang(lang);
       try { localStorage.setItem('aoki-lang', lang); } catch (e) {}
-    }, 320);
+    }, 360);
+
+    // Page fade-back-in
     setTimeout(() => {
       root.classList.remove('lang-switching');
-    }, 360);
+    }, 400);
+
+    // Ribbon animation finishes ~1.4s in (1.2s anim + 0.2s last-stripe delay)
     setTimeout(() => {
+      root.classList.remove('lang-running');
       delete root.dataset.switchingTo;
-    }, 1300);
+      langSwitchBusy = false;
+    }, 1500);
   }
 
   if (langToggle) {
