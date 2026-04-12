@@ -1427,11 +1427,23 @@ p { margin: 0; }
 }
 .cap-card:hover .cap-icon { transform: translateY(-3px) scale(1.06); }
 .cap-card .cap-icon {
-  transition: transform 0.85s cubic-bezier(0.32, 0.72, 0, 1), background 0.6s ease, border-color 0.6s ease;
+  transition:
+    transform 0.85s cubic-bezier(0.32, 0.72, 0, 1),
+    background 0.6s ease,
+    border-color 0.6s ease,
+    box-shadow 0.6s ease;
 }
 .cap-card:hover .cap-icon {
-  background: linear-gradient(135deg, rgba(19, 130, 164, 0.18), rgba(43, 163, 199, 0.22));
-  border-color: rgba(19, 130, 164, 0.4);
+  background: linear-gradient(135deg, rgba(43, 163, 199, 0.32), rgba(95, 196, 220, 0.42));
+  border-color: rgba(43, 163, 199, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(43, 163, 199, 0.35),
+    0 10px 26px -8px rgba(43, 163, 199, 0.5),
+    inset 0 0 18px rgba(95, 196, 220, 0.28);
+}
+.cap-card:hover .cap-icon svg {
+  color: var(--brand-bright);
+  filter: drop-shadow(0 0 8px rgba(43, 163, 199, 0.55));
 }
 
 .cap-icon {
@@ -1444,7 +1456,11 @@ p { margin: 0; }
   justify-content: center;
   margin-bottom: 1.5rem;
 }
-.cap-icon svg { width: 24px; height: 24px; color: var(--brand); }
+.cap-icon svg {
+  width: 24px; height: 24px;
+  color: var(--brand);
+  transition: color 0.5s ease, filter 0.5s ease;
+}
 .cap-title {
   font-size: 1.18rem;
   font-weight: 600;
@@ -2378,8 +2394,16 @@ html .site-footer {
     0 22px 40px -16px rgba(43, 163, 199, 0.35);
 }
 [data-theme="dark"] .cap-card:hover .cap-icon {
-  background: linear-gradient(135deg, rgba(43, 163, 199, 0.25), rgba(95, 196, 220, 0.3));
-  border-color: rgba(95, 196, 220, 0.45);
+  background: linear-gradient(135deg, rgba(43, 163, 199, 0.4), rgba(141, 215, 232, 0.48));
+  border-color: rgba(141, 215, 232, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(141, 215, 232, 0.5),
+    0 12px 28px -8px rgba(95, 196, 220, 0.55),
+    inset 0 0 20px rgba(141, 215, 232, 0.32);
+}
+[data-theme="dark"] .cap-card:hover .cap-icon svg {
+  color: #8DD7E8;
+  filter: drop-shadow(0 0 10px rgba(141, 215, 232, 0.7));
 }
 
 /* Dark-mode "Iniciar sesión" soft button */
