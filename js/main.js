@@ -564,12 +564,12 @@
   if (chatBody) chatBubbles = Array.from(chatBody.querySelectorAll('.bubble'));
   function replayChat() {
     chatBubbles.forEach(b => {
-      b.style.animation = 'none';
+      b.style.animationName = 'none';
       void b.offsetWidth;
-      b.style.animation = '';
+      b.style.animationName = '';
     });
   }
-  if (chatBody) setInterval(replayChat, 12000);
+  if (chatBody) setInterval(replayChat, 8500);
 
   // Platform tabs
   const chatTabs = document.querySelectorAll('.chat-tab');
