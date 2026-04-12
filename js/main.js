@@ -2,14 +2,6 @@
 (function () {
   'use strict';
 
-  if (window.trustedTypes && window.trustedTypes.createPolicy) {
-    try {
-      window.trustedTypes.createPolicy('default', {
-        createHTML: function(s) { return s; }
-      });
-    } catch (e) {}
-  }
-
   let chatBubbles = [];
 
   /* ============================================================
@@ -19,7 +11,7 @@
   if (window.trustedTypes && window.trustedTypes.createPolicy) {
     try {
       policy = window.trustedTypes.createPolicy('default', { createHTML: s => s });
-    } catch(e) {}
+    } catch (e) {}
   }
   const toHTML = s => policy ? policy.createHTML(s) : s;
   const TRANS = {
@@ -749,7 +741,6 @@
   /* ============================================================
      Chat replay loop + platform tabs
      ============================================================ */
-  const chatBody = document.getElementById('chat-body');
   const phoneFrame = document.querySelector('.phone-frame');
   function replayChat() {
     if (!chatBubbles) return;

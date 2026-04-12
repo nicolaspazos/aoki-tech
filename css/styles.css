@@ -121,7 +121,6 @@ p { margin: 0; }
   padding: 0 var(--gutter);
 }
 .section { padding: clamp(5rem, 10vw, 8rem) 0; position: relative; }
-.section--tight { padding: clamp(3.5rem, 7vw, 5rem) 0; }
 
 .eyebrow {
   display: inline-flex;
@@ -1120,7 +1119,7 @@ p { margin: 0; }
 .phone-badge-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
 .phone-badge-sub { font-size: 0.7rem; color: var(--text-mid); margin-top: 1px; }
 .phone-badge-1 {
-  top: 3%;
+  top: 7%;
   left: -6%;
   transform: translateY(8px);
   animation-delay: 1.2s;
@@ -2178,21 +2177,9 @@ html {
 }
 
 /* ============= LANGUAGE SWITCH ANIMATION ============= */
-img[data-logo-swap] {
-  transition:
-    opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity, transform, filter;
-}
-img[data-logo-swap].is-swapping {
-  opacity: 0;
-  transform: translateY(6px) scale(0.96);
-  filter: blur(4px);
-}
-
 html.lang-switching main,
 html.lang-switching .site-header .nav,
+html.lang-switching .site-header .brand-mark img,
 html.lang-switching .site-footer {
   opacity: 0;
   transform: translateY(10px);
@@ -2204,6 +2191,7 @@ html.lang-switching .site-footer {
 }
 html main,
 html .site-header .nav,
+html .site-header .brand-mark img,
 html .site-footer {
   transition:
     opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
