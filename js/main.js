@@ -312,7 +312,7 @@
         input: 'Escribí un mensaje…',
         bubbles: [
           { type: 'in', text: '¡Hola! ☕ Quiero el menú del día porfa!' },
-          { type: 'out', text: '¡Hola! Qué lindo que nos escribas. 😍 Te paso el menú y promos para hoy 👇' },
+          { type: 'out', text: '¡Hola! Claro que sí, te paso el menú y las promos de hoy 👇' },
           { type: 'file', name: 'Menú-Almuerzo.pdf', meta: '128 KB · PDF' },
           { type: 'in', text: '¿Tienen capuchino con leche de almendras? 🥛' },
           { type: 'out', text: '¡Obvio! 💛 ¿Lo querés para tomar acá o para llevar?' },
@@ -324,7 +324,7 @@
         input: 'Type a message…',
         bubbles: [
           { type: 'in', text: 'Hi! ☕ Can I see today\'s menu?' },
-          { type: 'out', text: 'Hello! 😍 Here is our menu and today\'s promos 👇' },
+          { type: 'out', text: 'Hi! Of course, here is our menu and today\'s promos 👇' },
           { type: 'file', name: 'Lunch-Menu.pdf', meta: '128 KB · PDF' },
           { type: 'in', text: 'Do you have cappuccino with almond milk? 🥛' },
           { type: 'out', text: 'Of course! 💛 For here or to go?' },
@@ -333,17 +333,17 @@
       }
     },
     instagram: {
-      avatar: 'images/boutique-avatar.png',
-      title: 'Estilo Boutique',
+      avatar: 'images/tienda-ropa.png',
+      title: 'RopaYa',
       es: {
         status: 'Activa ahora · Agente IA',
         input: 'Mensaje…',
         bubbles: [
-          { type: 'in',   text: '¡Hola! Vi el vestido del último post 👗 ¿hay stock?' },
-          { type: 'out',  text: '¡Hola, hermosa! Sí, todavía nos quedan unidades ✨' },
-          { type: 'file', name: 'Lookbook-Verano.pdf', meta: '256 KB · PDF' },
-          { type: 'in',   text: '¿Qué talles tenés disponibles? 🙏' },
-          { type: 'out',  text: 'S, M y L. Te lo reservo 24 hs si querés 💕' },
+          { type: 'in',   text: '¡Hola! Vi el top blanco de la última story 👗 ¿queda stock?' },
+          { type: 'out',  text: '¡Hola! Sí, nos quedan en S, M y L ✨' },
+          { type: 'file', name: 'Lookbook-RopaYa.pdf', meta: '312 KB · PDF' },
+          { type: 'in',   text: '¿Hacen envíos a Rosario? 📦' },
+          { type: 'out',  text: '¡Sí! Envío gratis por compras +$40.000 💖 Te lo reservo 24 hs' },
           { type: 'typing' }
         ]
       },
@@ -351,27 +351,27 @@
         status: 'Active now · AI Agent',
         input: 'Message…',
         bubbles: [
-          { type: 'in',   text: 'Hi! I saw the dress in your last post 👗 still in stock?' },
-          { type: 'out',  text: 'Hi gorgeous! Yes, we still have a few left ✨' },
-          { type: 'file', name: 'Summer-Lookbook.pdf', meta: '256 KB · PDF' },
-          { type: 'in',   text: 'What sizes do you have? 🙏' },
-          { type: 'out',  text: 'S, M and L. I can hold one for 24h if you want 💕' },
+          { type: 'in',   text: 'Hi! Loved the white top from your last story 👗 any stock?' },
+          { type: 'out',  text: 'Hi! Yes, we have it in S, M and L ✨' },
+          { type: 'file', name: 'RopaYa-Lookbook.pdf', meta: '312 KB · PDF' },
+          { type: 'in',   text: 'Do you ship to Rosario? 📦' },
+          { type: 'out',  text: 'Yes! Free shipping on orders over $40,000 💖 Hold one for 24h?' },
           { type: 'typing' }
         ]
       }
     },
     messenger: {
-      avatar: 'images/keburga-avatar.webp',
-      title: 'KeBurga',
+      avatar: 'images/hamb.webp',
+      title: 'KeBurger',
       es: {
         status: 'Activo · Agente IA',
         input: 'Escribí un mensaje…',
         bubbles: [
           { type: 'in',   text: '¡Hola! Quiero una doble cheddar con bacon 🍔' },
-          { type: 'out',  text: '¡Excelente elección! ¿La querés con papas cheddar? 🍟' },
-          { type: 'file', name: 'Menu-KeBurga.pdf', meta: '198 KB · PDF' },
-          { type: 'in',   text: 'Sí, sumá las papas y una Coca 🥤' },
-          { type: 'out',  text: '¡Anotado! Total $8.500 · Llega en 35 min 🔥' },
+          { type: 'out',  text: '¡Excelente! ¿La sumás con papas cheddar? 🍟' },
+          { type: 'file', name: 'Menu-KeBurger.pdf', meta: '198 KB · PDF' },
+          { type: 'in',   text: 'Dale, y una Coca bien fría 🥤' },
+          { type: 'out',  text: '¡Listo! Total $8.500 · Llega en 30-35 min 🔥' },
           { type: 'typing' }
         ]
       },
@@ -380,10 +380,10 @@
         input: 'Type a message…',
         bubbles: [
           { type: 'in',   text: 'Hi! I want a double cheddar with bacon 🍔' },
-          { type: 'out',  text: 'Great choice! Want cheddar fries with that? 🍟' },
-          { type: 'file', name: 'KeBurga-Menu.pdf', meta: '198 KB · PDF' },
-          { type: 'in',   text: 'Yes, add the fries and a Coke 🥤' },
-          { type: 'out',  text: 'Got it! Total $8,500 · Arrives in 35 min 🔥' },
+          { type: 'out',  text: 'Awesome! Add cheddar fries to that? 🍟' },
+          { type: 'file', name: 'KeBurger-Menu.pdf', meta: '198 KB · PDF' },
+          { type: 'in',   text: 'Yes, and an ice-cold Coke 🥤' },
+          { type: 'out',  text: 'Got it! Total $8,500 · Arrives in 30-35 min 🔥' },
           { type: 'typing' }
         ]
       }
@@ -397,11 +397,13 @@
     if (!data) return;
     const langData = data[lang] || data.es;
 
-    const avatarImg = document.getElementById('chat-avatar-img');
-    const titleEl = document.getElementById('chat-title');
-    const statusEl = document.getElementById('chat-status');
-    const inputEl = document.getElementById('chat-input-placeholder');
-    const body = document.getElementById('chat-body');
+    const frame = document.querySelector('.phone-frame');
+    if (!frame) return;
+    const avatarImg = frame.querySelector('.chat-avatar img');
+    const titleEl = frame.querySelector('.chat-title');
+    const statusTextEl = frame.querySelector('.chat-status .chat-status-text');
+    const inputEl = frame.querySelector('.chat-input > span');
+    const body = frame.querySelector('.chat-body');
     if (!body) return;
 
     if (avatarImg) {
@@ -409,7 +411,7 @@
       avatarImg.setAttribute('alt', data.title);
     }
     if (titleEl) titleEl.textContent = data.title;
-    if (statusEl) statusEl.textContent = langData.status;
+    if (statusTextEl) statusTextEl.textContent = langData.status;
     if (inputEl) inputEl.textContent = langData.input;
 
     body.textContent = '';
@@ -500,9 +502,9 @@
       if (!next || img.getAttribute('src') === next) return;
       img.setAttribute('src', next);
     });
-    renderChat(currentPlatform, lang);
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
+    try { renderChat(currentPlatform, lang); } catch (e) {}
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
@@ -709,20 +711,23 @@
 
     // Mid-animation: swap the page text
     setTimeout(() => {
-      applyLang(lang);
+      try { applyLang(lang); } catch (e) {}
       try { localStorage.setItem('aoki-lang', lang); } catch (e) {}
     }, 360);
 
-    // Page fade-back-in
+    // Page fade-back-in + release the re-click guard as soon as the text
+    // swap is done so a quick second click (es→en→es) isn't swallowed.
     setTimeout(() => {
       root.classList.remove('lang-switching');
-    }, 400);
+      langSwitchBusy = false;
+    }, 520);
 
-    // Ribbon animation finishes ~1.4s in (1.2s anim + 0.2s last-stripe delay)
+    // Ribbon animation finishes ~1.4s in (1.2s anim + 0.2s last-stripe delay).
+    // The busy lock has already been released above; this only cleans up the
+    // decorative ribbon class.
     setTimeout(() => {
       root.classList.remove('lang-running');
       delete root.dataset.switchingTo;
-      langSwitchBusy = false;
     }, 1500);
   }
 
