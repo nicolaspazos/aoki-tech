@@ -321,9 +321,26 @@
     if (descMeta && dict['meta.description']) descMeta.setAttribute('content', dict['meta.description']);
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', lang === 'en' ? 'en_US' : 'es_AR');
+    const animateLogos = document.documentElement.classList.contains('lang-switching');
     document.querySelectorAll('img[data-logo-swap]').forEach(img => {
       const next = img.dataset['logo' + (lang === 'en' ? 'En' : 'Es')];
-      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+      if (!next || img.getAttribute('src') === next) return;
+      if (!animateLogos) {
+        img.setAttribute('src', next);
+        return;
+      }
+      img.classList.add('is-swapping');
+      const swap = () => {
+        img.setAttribute('src', next);
+        const reveal = () => img.classList.remove('is-swapping');
+        if (img.decode) {
+          img.decode().then(reveal).catch(reveal);
+        } else {
+          img.addEventListener('load', reveal, { once: true });
+        }
+      };
+      // Wait for the fade-out to mostly complete before swapping the source
+      setTimeout(swap, 220);
     });
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
