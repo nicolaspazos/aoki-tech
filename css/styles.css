@@ -523,6 +523,9 @@ p { margin: 0; }
 .nav-toggle.is-open span::before { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.is-open span::after { transform: translateY(-7px) rotate(-45deg); }
 
+/* Logo shown inside the mobile drawer (hidden on desktop) */
+.nav-brand { display: none; }
+
 @media (max-width: 1024px) {
   .nav-toggle { display: inline-flex; }
   .nav {
@@ -547,6 +550,20 @@ p { margin: 0; }
     opacity: 1;
     pointer-events: auto;
     transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
+  }
+
+  .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 10;
+  }
+  .nav-brand img {
+    display: block;
+    height: 44px;
+    width: auto;
   }
 
   .nav-close {
@@ -681,38 +698,6 @@ p { margin: 0; }
 }
 @media (max-width: 960px) {
   .hero-shell { grid-template-columns: 1fr; }
-}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 1.05rem 0.5rem 0.6rem;
-  border: 1px solid rgba(19, 130, 164, 0.22);
-  border-radius: 999px;
-  background: rgba(19, 130, 164, 0.07);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--brand);
-  margin-bottom: 1.75rem;
-  backdrop-filter: blur(10px);
-}
-.hero-eyebrow .dot {
-  width: 18px;
-  height: 18px;
-  background-image: url("../aoki-favicon.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: drop-shadow(0 0 10px rgba(95, 196, 220, 0.75));
-  animation: pulse 2.4s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1;    transform: scale(1);    }
-  50%      { opacity: 0.7;  transform: scale(1.12); }
 }
 
 .hero-title {

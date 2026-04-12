@@ -25,7 +25,6 @@
       'nav.demo': 'Agendá una demo',
       'nav.cta': 'Creá tu Agente IA',
 
-      'hero.eyebrow': 'Meta Business Partner · Powered by GPT & Gemini',
       'hero.title': '<span class="row"><span class="word">Tu <span class="accent">agente de IA</span></span></span><span class="row"><span class="word">que vende</span></span><span class="row"><span class="word">por vos <span class="accent-alt">24/7.</span></span></span>',
       'hero.lede': 'Automatizá conversaciones por WhatsApp e Instagram, agendá reuniones, enviá archivos y cerrá ventas mientras dormís. Entrenado para tu negocio en minutos, sin código.',
       'hero.cta1': 'Probalo Gratis',
@@ -163,7 +162,6 @@
       'nav.demo': 'Book a demo',
       'nav.cta': 'Create your AI Agent',
 
-      'hero.eyebrow': 'Meta Business Partner · Powered by GPT & Gemini',
       'hero.title': '<span class="row"><span class="word">Your <span class="accent">AI agent</span></span></span><span class="row"><span class="word">that sells</span></span><span class="row"><span class="word">for you <span class="accent-alt">24/7.</span></span></span>',
       'hero.lede': 'Automate conversations on WhatsApp and Instagram, book meetings, send files and close sales while you sleep. Trained for your business in minutes, no code required.',
       'hero.cta1': 'Try it Free',
