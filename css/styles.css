@@ -646,14 +646,14 @@ p { margin: 0; }
 /* ============= HERO ============= */
 .hero {
   position: relative;
-  padding: clamp(7rem, 13vw, 10rem) 0 clamp(4rem, 8vw, 6rem);
+  padding: clamp(6.5rem, 11vw, 8.5rem) 0 clamp(4rem, 8vw, 6rem);
   background: var(--grad-deep);
   overflow: hidden;
   isolation: isolate;
 }
 @media (max-width: 1024px) {
   .hero {
-    padding-top: 10rem;
+    padding-top: 8.5rem;
   }
 }
 .hero-bg {
