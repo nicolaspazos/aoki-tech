@@ -138,6 +138,11 @@ p { margin: 0; }
   border: 1px solid rgba(19, 130, 164, 0.18);
   border-radius: 999px;
 }
+@media (max-width: 768px) {
+  .eyebrow {
+    font-size: 0.72rem;
+  }
+}
 .eyebrow::before {
   content: "";
   width: 16px;
@@ -233,13 +238,18 @@ p { margin: 0; }
   box-shadow: 0 20px 36px -16px rgba(19, 130, 164, 0.42);
 }
 .btn-light {
-  background: #FFFFFF;
-  color: var(--brand-deep);
-  box-shadow: 0 14px 32px -12px rgba(0, 0, 0, 0.35);
+  padding: 1rem 2.25rem;
+  border-radius: 999px;
+  background: var(--btn-light);
+  color: #1382A4;
+  font-weight: 600;
+  border: 1px solid rgba(19, 130, 164, 0.2);
+  transition: all 0.4s ease;
 }
 .btn-light:hover {
+  background: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 22px 44px -14px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(19, 130, 164, 0.15);
 }
 
 /* ============= HEADER ============= */
@@ -577,6 +587,11 @@ p { margin: 0; }
   background: var(--grad-deep);
   overflow: hidden;
   isolation: isolate;
+}
+@media (max-width: 1024px) {
+  .hero {
+    padding-top: 10rem;
+  }
 }
 .hero-bg {
   position: absolute;
@@ -1105,8 +1120,8 @@ p { margin: 0; }
 .phone-badge-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
 .phone-badge-sub { font-size: 0.7rem; color: var(--text-mid); margin-top: 1px; }
 .phone-badge-1 {
-  top: 18%;
-  left: -10%;
+  top: 12%;
+  left: -15%;
   transform: translateY(8px);
   animation-delay: 1.2s;
 }
@@ -1115,6 +1130,9 @@ p { margin: 0; }
   right: -8%;
   transform: translateY(8px);
   animation-delay: 1.6s;
+}
+@media (max-width: 1240px) {
+  .phone-badge { display: none; }
 }
 @media (max-width: 960px) {
   .phone-badge-1 { left: 0; }
