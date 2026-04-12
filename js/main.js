@@ -2,6 +2,16 @@
 (function () {
   'use strict';
 
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    try {
+      window.trustedTypes.createPolicy('default', {
+        createHTML: function(s) { return s; }
+      });
+    } catch (e) {}
+  }
+
+  let chatBubbles = [];
+
   /* ============================================================
      i18n — Spanish (source) + English
      ============================================================ */
@@ -25,15 +35,6 @@
       'hero.stat2Label': 'Más facturación',
       'hero.stat3Label': 'Atención sin pausa',
 
-      'chat.title': 'La Primera Café',
-      'chat.status': 'En línea · Agente IA',
-      'chat.b1': 'Hola! Quiero el menú del día 🍽️',
-      'chat.b2': '¡Hola! Por supuesto, te paso el menú de hoy 👇',
-      'chat.fileName': 'Menú-Almuerzo.pdf',
-      'chat.fileMeta': '128 KB · PDF',
-      'chat.b3': '¿Lo preparan para retirar?',
-      'chat.b4': '¡Dale! ¿Para qué hora lo querés? Tenemos turnos desde las 12:00 🕛',
-      'chat.input': 'Escribí un mensaje…',
 
       'badge1.title': 'Respuestas automáticas',
       'badge1.sub': '98.5% resueltas por IA',
@@ -172,15 +173,6 @@
       'hero.stat2Label': 'More revenue',
       'hero.stat3Label': 'Always on',
 
-      'chat.title': 'La Primera Café',
-      'chat.status': 'Online · AI Agent',
-      'chat.b1': "Hi! I'd like today's menu 🍽️",
-      'chat.b2': "Hi there! Sure, here's today's menu 👇",
-      'chat.fileName': 'Lunch-Menu.pdf',
-      'chat.fileMeta': '128 KB · PDF',
-      'chat.b3': 'Can you have it ready for pickup?',
-      'chat.b4': 'Of course! What time would you like? Slots available from 12:00 🕛',
-      'chat.input': 'Type a message…',
 
       'badge1.title': 'Automated replies',
       'badge1.sub': '98.5% resolved by AI',
@@ -301,6 +293,181 @@
     }
   };
 
+  /* ============================================================
+     Chat scenarios per platform & language
+     ============================================================ */
+  const CHATS = {
+    whatsapp: {
+      avatar: 'images/coffee-avatar.jpg',
+      title: 'La Primera Café',
+      es: {
+        status: 'En línea · Agente IA',
+        input: 'Escribí un mensaje…',
+        bubbles: [
+          { type: 'in', text: '¡Hola! ☕ Quiero el menú del día porfa!' },
+          { type: 'out', text: '¡Hola! Qué lindo que nos escribas. 😍 Te paso el menú y promos para hoy 👇' },
+          { type: 'file', name: 'Menú-Almuerzo.pdf', meta: '128 KB · PDF' },
+          { type: 'in', text: '¿Tienen capuchino con leche de almendras? 🥛' },
+          { type: 'out', text: '¡Obvio! 💛 ¿Lo querés para tomar acá o para llevar?' },
+          { type: 'typing' }
+        ]
+      },
+      en: {
+        status: 'Online · AI Agent',
+        input: 'Type a message…',
+        bubbles: [
+          { type: 'in', text: 'Hi! ☕ Can I see today\'s menu?' },
+          { type: 'out', text: 'Hello! 😍 Here is our menu and today\'s promos 👇' },
+          { type: 'file', name: 'Lunch-Menu.pdf', meta: '128 KB · PDF' },
+          { type: 'in', text: 'Do you have cappuccino with almond milk? 🥛' },
+          { type: 'out', text: 'Of course! 💛 For here or to go?' },
+          { type: 'typing' }
+        ]
+      }
+    },
+    instagram: {
+      avatar: 'images/boutique-avatar.png',
+      title: 'Estilo Boutique',
+      es: {
+        status: 'Activa ahora · Agente IA',
+        input: 'Mensaje…',
+        bubbles: [
+          { type: 'in',   text: '¡Hola! Vi el vestido del último post 👗 ¿hay stock?' },
+          { type: 'out',  text: '¡Hola, hermosa! Sí, todavía nos quedan unidades ✨' },
+          { type: 'file', name: 'Lookbook-Verano.pdf', meta: '256 KB · PDF' },
+          { type: 'in',   text: '¿Qué talles tenés disponibles? 🙏' },
+          { type: 'out',  text: 'S, M y L. Te lo reservo 24 hs si querés 💕' },
+          { type: 'typing' }
+        ]
+      },
+      en: {
+        status: 'Active now · AI Agent',
+        input: 'Message…',
+        bubbles: [
+          { type: 'in',   text: 'Hi! I saw the dress in your last post 👗 still in stock?' },
+          { type: 'out',  text: 'Hi gorgeous! Yes, we still have a few left ✨' },
+          { type: 'file', name: 'Summer-Lookbook.pdf', meta: '256 KB · PDF' },
+          { type: 'in',   text: 'What sizes do you have? 🙏' },
+          { type: 'out',  text: 'S, M and L. I can hold one for 24h if you want 💕' },
+          { type: 'typing' }
+        ]
+      }
+    },
+    messenger: {
+      avatar: 'images/keburga-avatar.webp',
+      title: 'KeBurga',
+      es: {
+        status: 'Activo · Agente IA',
+        input: 'Escribí un mensaje…',
+        bubbles: [
+          { type: 'in',   text: '¡Hola! Quiero una doble cheddar con bacon 🍔' },
+          { type: 'out',  text: '¡Excelente elección! ¿La querés con papas cheddar? 🍟' },
+          { type: 'file', name: 'Menu-KeBurga.pdf', meta: '198 KB · PDF' },
+          { type: 'in',   text: 'Sí, sumá las papas y una Coca 🥤' },
+          { type: 'out',  text: '¡Anotado! Total $8.500 · Llega en 35 min 🔥' },
+          { type: 'typing' }
+        ]
+      },
+      en: {
+        status: 'Active · AI Agent',
+        input: 'Type a message…',
+        bubbles: [
+          { type: 'in',   text: 'Hi! I want a double cheddar with bacon 🍔' },
+          { type: 'out',  text: 'Great choice! Want cheddar fries with that? 🍟' },
+          { type: 'file', name: 'KeBurga-Menu.pdf', meta: '198 KB · PDF' },
+          { type: 'in',   text: 'Yes, add the fries and a Coke 🥤' },
+          { type: 'out',  text: 'Got it! Total $8,500 · Arrives in 35 min 🔥' },
+          { type: 'typing' }
+        ]
+      }
+    }
+  };
+
+  let currentPlatform = 'whatsapp';
+
+  function renderChat(platform, lang) {
+    const data = CHATS[platform];
+    if (!data) return;
+    const langData = data[lang] || data.es;
+
+    const avatarImg = document.getElementById('chat-avatar-img');
+    const titleEl = document.getElementById('chat-title');
+    const statusEl = document.getElementById('chat-status');
+    const inputEl = document.getElementById('chat-input-placeholder');
+    const body = document.getElementById('chat-body');
+    if (!body) return;
+
+    if (avatarImg) {
+      if (avatarImg.getAttribute('src') !== data.avatar) avatarImg.setAttribute('src', data.avatar);
+      avatarImg.setAttribute('alt', data.title);
+    }
+    if (titleEl) titleEl.textContent = data.title;
+    if (statusEl) statusEl.textContent = langData.status;
+    if (inputEl) inputEl.textContent = langData.input;
+
+    body.textContent = '';
+    let currentDelay = 0.6;
+    langData.bubbles.forEach((b) => {
+      let el;
+      if (b.type === 'in' || b.type === 'out') {
+        el = document.createElement('div');
+        el.className = 'bubble ' + b.type;
+        el.textContent = b.text;
+      } else if (b.type === 'file') {
+        el = document.createElement('div');
+        el.className = 'bubble out file';
+        
+        let svgNS = 'http://www.w3.org/2000/svg';
+        let svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('aria-hidden', 'true');
+        
+        let path = document.createElementNS(svgNS, 'path');
+        path.setAttribute('d', 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z');
+        let poly = document.createElementNS(svgNS, 'polyline');
+        poly.setAttribute('points', '14 2 14 8 20 8');
+        
+        svg.appendChild(path);
+        svg.appendChild(poly);
+        
+        let info = document.createElement('div');
+        let nameDiv = document.createElement('div');
+        nameDiv.className = 'file-name';
+        nameDiv.textContent = b.name;
+        let metaDiv = document.createElement('div');
+        metaDiv.className = 'file-meta';
+        metaDiv.textContent = b.meta;
+        
+        info.appendChild(nameDiv);
+        info.appendChild(metaDiv);
+        
+        el.appendChild(svg);
+        el.appendChild(info);
+      } else if (b.type === 'typing') {
+        el = document.createElement('div');
+        el.className = 'bubble in typing';
+        el.setAttribute('aria-hidden', 'true');
+        el.appendChild(document.createElement('span'));
+        el.appendChild(document.createElement('span'));
+        el.appendChild(document.createElement('span'));
+      }
+      
+      if (el) {
+        el.style.animationDelay = currentDelay + 's';
+        body.appendChild(el);
+        let readingTime = b.text ? Math.min(b.text.length * 0.02, 1.2) : 0.6;
+        currentDelay += 0.4 + readingTime;
+      }
+    });
+
+    chatBubbles = Array.from(body.querySelectorAll('.bubble'));
+    scheduleReplay(currentDelay);
+  }
+
   function applyLang(lang) {
     const dict = TRANS[lang];
     if (!dict) return;
@@ -321,27 +488,12 @@
     if (descMeta && dict['meta.description']) descMeta.setAttribute('content', dict['meta.description']);
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', lang === 'en' ? 'en_US' : 'es_AR');
-    const animateLogos = document.documentElement.classList.contains('lang-switching');
     document.querySelectorAll('img[data-logo-swap]').forEach(img => {
       const next = img.dataset['logo' + (lang === 'en' ? 'En' : 'Es')];
       if (!next || img.getAttribute('src') === next) return;
-      if (!animateLogos) {
-        img.setAttribute('src', next);
-        return;
-      }
-      img.classList.add('is-swapping');
-      const swap = () => {
-        img.setAttribute('src', next);
-        const reveal = () => img.classList.remove('is-swapping');
-        if (img.decode) {
-          img.decode().then(reveal).catch(reveal);
-        } else {
-          img.addEventListener('load', reveal, { once: true });
-        }
-      };
-      // Wait for the fade-out to mostly complete before swapping the source
-      setTimeout(swap, 220);
+      img.setAttribute('src', next);
     });
+    renderChat(currentPlatform, lang);
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
     const yearEl = document.getElementById('year');
@@ -369,14 +521,21 @@
      ============================================================ */
   const navToggle = document.getElementById('nav-toggle');
   const nav = document.getElementById('primary-nav');
-  if (navToggle && nav) {
-    navToggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
-      navToggle.classList.toggle('is-open', open);
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.style.overflow = open ? 'hidden' : '';
+  const siteHeader = document.getElementById('site-header');
+  
+  const navCloseBtn = document.querySelector('.nav-close');
+  if (navCloseBtn) {
+    navCloseBtn.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      document.body.style.overflow = '';
+      navToggle.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
-    nav.querySelectorAll('a').forEach(link => {
+  }
+
+  const navLinks = nav ? nav.querySelectorAll('a') : [];
+  if (navLinks.length) {
+    navLinks.forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('is-open');
         navToggle.classList.remove('is-open');
@@ -384,6 +543,26 @@
         document.body.style.overflow = '';
       });
     });
+  }
+
+  if (navToggle && nav) {
+    const setNavOpen = (open) => {
+      nav.classList.toggle('is-open', open);
+      navToggle.classList.toggle('is-open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (siteHeader) {
+        if (open) {
+          siteHeader.classList.remove('is-nav-closing');
+          siteHeader.classList.add('is-nav-open');
+        } else {
+          siteHeader.classList.remove('is-nav-open');
+          siteHeader.classList.add('is-nav-closing');
+          setTimeout(() => siteHeader.classList.remove('is-nav-closing'), 500);
+        }
+      }
+    };
+    navToggle.addEventListener('click', () => setNavOpen(!nav.classList.contains('is-open')));
   }
 
   /* ============================================================
@@ -405,9 +584,9 @@
   }
 
   /* ============================================================
-     Capability card spotlight
+     Card spotlight (capabilities, steps, plans, etc.)
      ============================================================ */
-  document.querySelectorAll('.cap-card').forEach(card => {
+  document.querySelectorAll('.cap-card, .process-step, .plan, .partner-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -560,16 +739,20 @@
      ============================================================ */
   const chatBody = document.getElementById('chat-body');
   const phoneFrame = document.querySelector('.phone-frame');
-  let chatBubbles = [];
-  if (chatBody) chatBubbles = Array.from(chatBody.querySelectorAll('.bubble'));
   function replayChat() {
+    if (!chatBubbles) return;
     chatBubbles.forEach(b => {
       b.style.animationName = 'none';
       void b.offsetWidth;
       b.style.animationName = '';
     });
   }
-  if (chatBody) setInterval(replayChat, 8500);
+
+  let chatReplayTimer = null;
+  function scheduleReplay(totalDurationSeconds) {
+    if (chatReplayTimer) clearInterval(chatReplayTimer);
+    chatReplayTimer = setInterval(replayChat, (totalDurationSeconds + 5) * 1000);
+  }
 
   // Platform tabs
   const chatTabs = document.querySelectorAll('.chat-tab');
@@ -584,9 +767,12 @@
           t.setAttribute('aria-selected', active ? 'true' : 'false');
         });
         phoneFrame.dataset.platform = platform;
-        replayChat();
+        currentPlatform = platform;
+        renderChat(currentPlatform, document.documentElement.dataset.lang || 'es');
       });
     });
+    // Render the initial WhatsApp sequence immediately properly
+    renderChat(currentPlatform, initialLang || 'es');
   }
 
   /* ============================================================
@@ -594,6 +780,25 @@
      ============================================================ */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ============================================================
+     CTA form — open the user's mail client without putting a
+     mailto: URL in the page (avoids mixed-content warnings)
+     ============================================================ */
+  const ctaForm = document.getElementById('cta-form');
+  if (ctaForm) {
+    ctaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(ctaForm);
+      const name = (data.get('name') || '').toString().trim();
+      const email = (data.get('email') || '').toString().trim();
+      const to = ctaForm.dataset.mail || '';
+      const subject = encodeURIComponent('Quiero probar mi Agente IA');
+      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n`);
+      // Build mailto: at click time so it's not part of the static document.
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    });
+  }
 
   /* ============================================================
      Smooth anchor scroll

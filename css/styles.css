@@ -416,7 +416,7 @@ p { margin: 0; }
   box-shadow: 0 8px 22px -10px rgba(19, 130, 164, 0.5);
 }
 .nav .header-cta:hover {
-  color: #FFFFFF;
+  color: #e6f7ff;
   border-color: transparent;
   transform: translateY(-2px);
   box-shadow: 0 22px 38px -14px rgba(19, 130, 164, 0.55);
@@ -501,6 +501,44 @@ p { margin: 0; }
     opacity: 1;
     pointer-events: auto;
     transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
+  }
+
+  .nav-close {
+    display: none;
+  }
+  @media (max-width: 1024px) {
+    .nav-close {
+      display: flex;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(19, 130, 164, 0.08);
+      border: none;
+      border-radius: 50%;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      z-index: 10;
+    }
+    .nav-close:hover {
+      background: rgba(19, 130, 164, 0.15);
+      transform: scale(1.05);
+    }
+    .nav-close svg {
+      width: 24px;
+      height: 24px;
+    }
+    [data-theme="dark"] .nav-close {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    [data-theme="dark"] .nav-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
   }
 
   /* Plain text links (Cómo funciona, Clientes, Precios) */
@@ -1241,7 +1279,7 @@ p { margin: 0; }
 @media (max-width: 980px) { .caps-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .caps-grid { grid-template-columns: 1fr; } }
 
-.cap-card {
+.cap-card, .process-step, .plan, .partner-card {
   position: relative;
   padding: 2.25rem 2rem;
   background: var(--bg-card);
@@ -1257,7 +1295,7 @@ p { margin: 0; }
   box-shadow: 0 4px 16px -10px rgba(19, 130, 164, 0.18);
   will-change: transform;
 }
-.cap-card::before {
+.cap-card::before, .process-step::before, .plan::before, .partner-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1266,7 +1304,7 @@ p { margin: 0; }
   transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: -1;
 }
-.cap-card::after {
+.cap-card::after, .process-step::after, .plan::after, .partner-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -1281,6 +1319,11 @@ p { margin: 0; }
   pointer-events: none;
   z-index: 0;
 }
+.cap-card:hover::before, .process-step:hover::before, .plan:hover::before, .partner-card:hover::before,
+.cap-card:hover::after, .process-step:hover::after, .plan:hover::after, .partner-card:hover::after {
+  opacity: 1;
+}
+
 .cap-card:hover {
   transform: translateY(-10px);
   border-color: rgba(19, 130, 164, 0.45);
@@ -1359,17 +1402,17 @@ p { margin: 0; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition:
-    border-color 0.7s cubic-bezier(0.5, 0, 0.1, 1),
     transform 0.7s cubic-bezier(0.5, 0, 0.1, 1),
+    border-color 0.7s cubic-bezier(0.5, 0, 0.1, 1),
     box-shadow 0.7s cubic-bezier(0.5, 0, 0.1, 1),
-    background 0.7s cubic-bezier(0.5, 0, 0.1, 1);
+    background-color 0.7s cubic-bezier(0.5, 0, 0.1, 1);
   box-shadow: 0 4px 16px -10px rgba(19, 130, 164, 0.15);
   will-change: transform;
 }
 .process-step:hover {
   border-color: rgba(19, 130, 164, 0.45);
   transform: translateX(8px) translateY(-3px);
-  background: #FCFEFF;
+  background-color: #FCFEFF;
   box-shadow:
     0 24px 44px -20px rgba(19, 130, 164, 0.35),
     0 8px 18px -10px rgba(43, 163, 199, 0.2);
@@ -1447,14 +1490,16 @@ p { margin: 0; }
     transform 0.75s cubic-bezier(0.5, 0, 0.1, 1),
     border-color 0.75s cubic-bezier(0.5, 0, 0.1, 1),
     box-shadow 0.75s cubic-bezier(0.5, 0, 0.1, 1),
-    background 0.75s cubic-bezier(0.5, 0, 0.1, 1);
+    background-color 0.75s cubic-bezier(0.5, 0, 0.1, 1);
   box-shadow: 0 8px 24px -16px rgba(19, 130, 164, 0.2);
   will-change: transform;
+  isolation: isolate;
+  overflow: hidden;
 }
 .plan:hover {
   transform: translateY(-12px);
   border-color: rgba(19, 130, 164, 0.5);
-  background: #FCFEFF;
+  background-color: #FCFEFF;
   box-shadow:
     0 42px 70px -24px rgba(19, 130, 164, 0.42),
     0 18px 36px -16px rgba(43, 163, 199, 0.25);
