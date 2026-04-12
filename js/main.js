@@ -295,7 +295,7 @@
      ============================================================ */
   const CHATS = {
     whatsapp: {
-      avatar: 'images/coffee-avatar.webp',
+      avatar: '/images/coffee-avatar.webp',
       title: 'La Primera Café',
       es: {
         status: 'En línea · Agente IA',
@@ -323,7 +323,7 @@
       }
     },
     instagram: {
-      avatar: 'images/tienda-ropa.webp',
+      avatar: '/images/tienda-ropa.webp',
       title: 'RopaYa',
       es: {
         status: 'Activa ahora · Agente IA',
@@ -351,7 +351,7 @@
       }
     },
     messenger: {
-      avatar: 'images/hamb.webp',
+      avatar: '/images/hamb.webp',
       title: 'KeBurger',
       es: {
         status: 'Activo · Agente IA',
