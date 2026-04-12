@@ -7,6 +7,8 @@
      ============================================================ */
   const TRANS = {
     es: {
+      'meta.title': 'Aoki Tech | Tu Agente de IA que vende por vos 24/7',
+      'meta.description': 'Aoki Tech es la plataforma líder en automatización conversacional con IA para LATAM. Creá tu Agente de IA en minutos y convertí visitantes en clientes 24/7 por WhatsApp, Instagram y Messenger.',
       'nav.steps': 'Cómo funciona',
       'nav.clients': 'Clientes',
       'nav.pricing': 'Precios',
@@ -152,6 +154,8 @@
     },
 
     en: {
+      'meta.title': 'Aoki Tech | Your AI Agent that sells for you 24/7',
+      'meta.description': "Aoki Tech is Latin America's leading AI conversational automation platform. Create your AI Agent in minutes and convert visitors into customers 24/7 via WhatsApp, Instagram and Messenger.",
       'nav.steps': 'How it works',
       'nav.clients': 'Clients',
       'nav.pricing': 'Pricing',
@@ -312,6 +316,11 @@
       const k = el.dataset.i18nPlaceholder;
       if (dict[k] !== undefined) el.placeholder = dict[k];
     });
+    if (dict['meta.title']) document.title = dict['meta.title'];
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta && dict['meta.description']) descMeta.setAttribute('content', dict['meta.description']);
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute('content', lang === 'en' ? 'en_US' : 'es_AR');
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
     const yearEl = document.getElementById('year');

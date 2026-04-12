@@ -466,15 +466,45 @@ p { margin: 0; }
     inset: 0;
     background: #FFFFFF;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 2.5rem;
-    padding: 5rem var(--gutter);
+    gap: 1.25rem;
+    padding: 6rem var(--gutter) 4rem;
     transform: translateX(100%);
     transition: transform 0.5s var(--ease);
+    z-index: 99;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav.is-open { transform: translateX(0); }
-  .nav a { font-size: 1.5rem; color: var(--text); }
-  .header-cta { font-size: 1rem; padding: 0.95rem 1.6rem; }
+
+  /* Plain text links (Cómo funciona, Clientes, Precios) */
+  .nav > a:not(.header-login):not(.header-secondary):not(.header-cta) {
+    font-size: 1.5rem !important;
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    width: auto;
+  }
+
+  /* All three pill buttons get reset to large mobile-friendly sizing */
+  .nav .header-login,
+  .nav .header-secondary,
+  .nav .header-cta {
+    margin-left: 0 !important;
+    padding: 1rem 2.25rem !important;
+    font-size: 1.05rem !important;
+    min-width: 260px;
+    text-align: center;
+    justify-content: center;
+  }
+  .nav .header-login { margin-top: 0.75rem; }
+  /* Add a visible outline to the white "Iniciar sesión" so it stands out on the white drawer */
+  .nav .header-login { border: 1.5px solid rgba(19, 130, 164, 0.45); }
+
+  [data-theme="dark"] .nav .header-login {
+    background: rgba(15, 22, 43, 0.8);
+    border-color: rgba(141, 215, 232, 0.4);
+  }
 }
 
 /* ============= HERO ============= */
