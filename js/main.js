@@ -685,39 +685,22 @@
 
     langSwitchBusy = true;
 
-    // Reset any in-flight ribbons by clearing the class first
-    root.classList.remove('lang-running');
-    delete root.dataset.switchingTo;
-    // Force reflow so the next class addition restarts CSS animations cleanly
-    void root.offsetWidth;
-
-    // Now set the target-lang palette attr and the running class - both stay on
-    // for the FULL duration of the ribbon animation (1.4s)
-    root.dataset.switchingTo = lang;
-    void root.offsetWidth;
+    // Start the content fade-out. The CSS transition on .lang-switching
+    // runs opacity/blur/translateY over ~0.32s.
     root.classList.add('lang-switching');
-    root.classList.add('lang-running');
 
-    // Mid-animation: swap the page text
+    // Mid-fade: swap the text once the page is blurred out.
     setTimeout(() => {
       try { applyLang(lang); } catch (e) {}
       try { localStorage.setItem('aoki-lang', lang); } catch (e) {}
-    }, 360);
+    }, 320);
 
-    // Page fade-back-in + release the re-click guard as soon as the text
-    // swap is done so a quick second click (es→en→es) isn't swallowed.
+    // Remove the class so the fresh language fades back in, and release
+    // the re-click guard so a quick second click isn't swallowed.
     setTimeout(() => {
       root.classList.remove('lang-switching');
       langSwitchBusy = false;
-    }, 520);
-
-    // Ribbon animation finishes ~1.4s in (1.2s anim + 0.2s last-stripe delay).
-    // The busy lock has already been released above; this only cleans up the
-    // decorative ribbon class.
-    setTimeout(() => {
-      root.classList.remove('lang-running');
-      delete root.dataset.switchingTo;
-    }, 1500);
+    }, 360);
   }
 
   // Map lang → URL path. /en/ is the canonical English route; / is Spanish.

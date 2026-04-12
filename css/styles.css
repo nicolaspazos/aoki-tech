@@ -2264,49 +2264,6 @@ html .site-footer {
     filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Sweeping ribbon overlay during the switch — colored by target language */
-.lang-sweep {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 200;
-  overflow: hidden;
-}
-.lang-sweep-stripe {
-  position: absolute;
-  top: -15%;
-  bottom: -15%;
-  width: 55%;
-  left: 0;
-  transform: translateX(-160%) skewX(-14deg);
-  filter: blur(18px);
-  opacity: 0;
-  pointer-events: none;
-}
-.lang-sweep-stripe-1 { background: linear-gradient(115deg, transparent 25%, var(--sweep-c1, transparent) 50%, transparent 75%); }
-.lang-sweep-stripe-2 { background: linear-gradient(115deg, transparent 25%, var(--sweep-c2, transparent) 50%, transparent 75%); }
-.lang-sweep-stripe-3 { background: linear-gradient(115deg, transparent 25%, var(--sweep-c3, transparent) 50%, transparent 75%); }
-
-/* The .lang-running class is added by JS for the entire ribbon duration */
-html.lang-running .lang-sweep-stripe-1 { animation: lang-sweep-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards; }
-html.lang-running .lang-sweep-stripe-2 { animation: lang-sweep-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards; }
-html.lang-running .lang-sweep-stripe-3 { animation: lang-sweep-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards; }
-
-@keyframes lang-sweep-in {
-  0%   { transform: translateX(-160%) skewX(-14deg); opacity: 0; }
-  18%  { opacity: 1; }
-  82%  { opacity: 1; }
-  100% { transform: translateX(260%) skewX(-14deg); opacity: 0; }
-}
-
-/* Brand teal palette for both languages */
-html[data-switching-to="es"],
-html[data-switching-to="en"] {
-  --sweep-c1: rgba(13, 104, 133, 0.55);   /* deep teal */
-  --sweep-c2: rgba(43, 163, 199, 0.6);    /* bright teal */
-  --sweep-c3: rgba(95, 196, 220, 0.55);   /* teal glow */
-}
-
 /* ============= DARK MODE OVERRIDES ============= */
 [data-theme="dark"] .site-header {
   background: rgba(6, 9, 18, 0.92);
