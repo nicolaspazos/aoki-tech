@@ -586,7 +586,7 @@
   /* ============================================================
      Card spotlight (capabilities, steps, plans, etc.)
      ============================================================ */
-  document.querySelectorAll('.cap-card, .process-step, .plan, .partner-card').forEach(card => {
+  document.querySelectorAll('.cap-card, .process-step, .plan').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
