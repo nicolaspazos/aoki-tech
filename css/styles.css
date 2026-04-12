@@ -431,12 +431,17 @@ p { margin: 0; }
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   white-space: nowrap;
+  /* Hover "lift" props stay on the slower curve so the button feels
+     weighty, but surface props (background/color/border) run on the
+     same 0.3s var(--ease) that the rest of the site uses for theme
+     swaps — otherwise the pill lags behind everything else when you
+     toggle dark mode. */
   transition:
     transform 0.55s cubic-bezier(0.5, 0, 0.1, 1),
     box-shadow 0.55s cubic-bezier(0.5, 0, 0.1, 1),
-    background 0.5s cubic-bezier(0.5, 0, 0.1, 1),
-    color 0.5s cubic-bezier(0.5, 0, 0.1, 1),
-    border-color 0.5s cubic-bezier(0.5, 0, 0.1, 1);
+    background 0.3s var(--ease),
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
   will-change: transform;
 }
 .nav .header-login::after,
