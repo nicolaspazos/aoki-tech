@@ -352,20 +352,30 @@ p { margin: 0; }
   align-items: center;
   position: relative;
   z-index: 102;
+  height: 56px;
+  overflow: visible;
+  transform-origin: left center;
+  transition: height 0.8s cubic-bezier(0.65, 0, 0.35, 1), transform 0.6s var(--ease);
 }
 .brand-mark img {
   display: block;
   height: 56px;
   width: auto;
   max-width: none;
-  transition: height 0.8s cubic-bezier(0.65, 0, 0.35, 1), transform 0.6s var(--ease), filter 0.5s var(--ease);
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), filter 0.5s var(--ease);
 }
-.is-scrolled .brand-mark img { height: 44px; }
+.is-scrolled .brand-mark { height: 44px; }
+.is-scrolled .brand-mark img { transform: scale(0.7857); } /* 44 / 56 */
 @media (max-width: 720px) {
+  .brand-mark { height: 46px; }
   .brand-mark img { height: 46px; }
-  .is-scrolled .brand-mark img { height: 38px; }
+  .is-scrolled .brand-mark { height: 38px; }
+  .is-scrolled .brand-mark img { transform: scale(0.8261); } /* 38 / 46 */
 }
-.brand-mark:hover img { transform: scale(1.04); filter: brightness(1.05); }
+.brand-mark:hover { transform: scale(1.04); }
+.brand-mark:hover img { filter: brightness(1.05); }
 
 .nav {
   display: flex;
@@ -1338,14 +1348,19 @@ p { margin: 0; }
 .cap-card, .process-step, .plan {
   position: relative;
   padding: 2.25rem 2rem;
-  background: var(--bg-card);
+  background-color: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  /* List both the longhand and the shorthand so every code path
+     (solid-to-solid, gradient-to-gradient, whatever the hover rule uses)
+     has a real transition target. Otherwise the dark-mode gradient on
+     .plan-popular snap-swaps to a flat color on hover. */
   transition:
     transform 0.7s cubic-bezier(0.5, 0, 0.1, 1),
     border-color 0.7s cubic-bezier(0.5, 0, 0.1, 1),
     box-shadow 0.7s cubic-bezier(0.5, 0, 0.1, 1),
-    background-color 0.7s cubic-bezier(0.5, 0, 0.1, 1);
+    background-color 0.7s cubic-bezier(0.5, 0, 0.1, 1),
+    background-image 0.7s cubic-bezier(0.5, 0, 0.1, 1);
   overflow: hidden;
   isolation: isolate;
   box-shadow: 0 4px 16px -10px rgba(19, 130, 164, 0.18);
@@ -1759,8 +1774,8 @@ p { margin: 0; }
     url("../aoki-favicon.png"),
     linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 480px auto, 64px 64px, 64px 64px;
-  background-position: calc(50% + 380px) center, 0 0, 0 0;
+  background-size: 400px auto, 64px 64px, 64px 64px;
+  background-position: calc(50% + 380px) 88%, 0 0, 0 0;
   background-repeat: no-repeat, repeat, repeat;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 30%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 30%, transparent 80%);
@@ -1789,29 +1804,39 @@ p { margin: 0; }
 }
 .cta-form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 0.75rem;
-  padding: 0.6rem;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  padding: 1.1rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
+  border-radius: var(--radius-lg);
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
 }
 .cta-form-row input {
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
-  padding: 0.85rem 1.1rem;
-  font-size: 0.95rem;
+  padding: 0.95rem 1.25rem;
+  font-size: 0.98rem;
   font-family: inherit;
   outline: none;
+  border-radius: 999px;
   min-width: 0;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.cta-form-row input:focus {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.42);
 }
 .cta-form-row input::placeholder {
   color: rgba(255, 255, 255, 0.65);
 }
-.cta-form-row .btn-light { padding: 0.85rem 1.4rem; }
+.cta-form-row .btn-light {
+  width: 100%;
+  padding: 0.95rem 1.4rem;
+  justify-content: center;
+}
 .cta-form-foot {
   display: flex;
   flex-wrap: wrap;
@@ -1832,13 +1857,8 @@ p { margin: 0; }
   color: #34D399;
 }
 @media (max-width: 720px) {
-  .cta-form-row {
-    grid-template-columns: 1fr;
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-  }
-  .cta-form-row input { padding: 0.75rem 1rem; }
-  .cta-form-row .btn-light { width: 100%; }
+  .cta-form-row { padding: 0.9rem; }
+  .cta-form-row input { padding: 0.85rem 1.1rem; }
 }
 
 /* ============= FOOTER ============= */
@@ -1929,8 +1949,10 @@ p { margin: 0; }
   color: #3B4E5B;
 }
 [data-theme="dark"] .footer-legal { color: #9FB4C1; }
-[data-theme="dark"] .footer-providers { color: #9FB4C1; }
-[data-theme="dark"] .footer-providers strong { color: #E4F2F7; }
+[data-theme="dark"] .footer-providers { color: #CFE2EA; }
+[data-theme="dark"] .footer-links a,
+[data-theme="dark"] .footer-links span { color: #CFE2EA; }
+[data-theme="dark"] .footer-links a:hover { color: var(--brand-glow); }
 .footer-social {
   display: flex;
   gap: 0.65rem;
@@ -2364,19 +2386,27 @@ html[data-switching-to="en"] {
   opacity: 0.45;
 }
 
-/* Dark-mode card hover: lift to a brighter dark surface, not white */
+/* Dark-mode card hover: lift to a brighter dark surface, not white.
+   Use the background-color longhand (not the `background` shorthand)
+   so we don't touch background-image — this keeps the transition
+   animating the color cleanly instead of snap-resetting the image. */
 [data-theme="dark"] .cap-card:hover,
 [data-theme="dark"] .process-step:hover,
 [data-theme="dark"] .plan:hover {
-  background: #182A45;
+  background-color: #182A45;
   border-color: rgba(95, 196, 220, 0.45);
   box-shadow:
     0 38px 70px -24px rgba(0, 0, 0, 0.7),
     0 14px 30px -14px rgba(43, 163, 199, 0.28),
     0 0 0 1px rgba(95, 196, 220, 0.08);
 }
+/* .plan-popular's base is a linear-gradient (see [data-theme="dark"]
+   .plan-popular above). To transition smoothly, the hover rule must
+   also be a linear-gradient with matching shape — same direction,
+   same number of stops, same positions. Then the browser interpolates
+   between the two color sets frame-by-frame instead of snap-swapping. */
 [data-theme="dark"] .plan-popular:hover {
-  background: #1A2D48;
+  background-image: linear-gradient(180deg, #1A2D48 0%, #152538 100%);
   box-shadow:
     0 50px 80px -22px rgba(0, 0, 0, 0.75),
     0 22px 40px -16px rgba(43, 163, 199, 0.35);

@@ -14,7 +14,7 @@
     } catch (e) {}
   }
   const toHTML = s => policy ? policy.createHTML(s) : s;
-  const TRANS = {
+  const TRANS = /*__I18N_START__*/ {
     es: {
       'meta.title': 'Aoki Tech | Tu Agente de IA que vende por vos 24/7',
       'meta.description': 'Aoki Tech es la plataforma líder en automatización conversacional con IA para LATAM. Creá tu Agente de IA en minutos y convertí visitantes en clientes 24/7 por WhatsApp, Instagram y Messenger.',
@@ -288,7 +288,7 @@
       'footer.c3': 'Terms & conditions',
       'footer.legal': '© <span id="year"></span> Aoki Tech. All rights reserved. · Terms · Privacy'
     }
-  };
+  } /*__I18N_END__*/;
 
   /* ============================================================
      Chat scenarios per platform & language
@@ -720,19 +720,47 @@
     }, 1500);
   }
 
+  // Map lang → URL path. /en/ is the canonical English route; / is Spanish.
+  const pathForLang = (l) => l === 'en' ? '/en/' : '/';
+  const langForPath = (p) => /^\/en(\/|$)/.test(p) ? 'en' : 'es';
+
   if (langToggle) {
     langToggle.addEventListener('click', () => {
       const current = document.documentElement.dataset.lang || 'es';
-      setLang(current === 'es' ? 'en' : 'es', true);
+      const next = current === 'es' ? 'en' : 'es';
+      // Keep the URL in sync with the displayed language without a page reload,
+      // so /en/ is bookmarkable and the back/forward buttons work naturally.
+      try { history.pushState({ lang: next }, '', pathForLang(next)); } catch (e) {}
+      setLang(next, true);
     });
   }
 
-  // Initial language: from localStorage (set by bootstrap script) or default 'es'
-  let initialLang = 'es';
-  try {
-    const stored = localStorage.getItem('aoki-lang');
-    if (stored === 'en' || stored === 'es') initialLang = stored;
-  } catch (e) {}
+  // Back/forward navigation between / and /en/ — swap content without reload.
+  window.addEventListener('popstate', () => {
+    const target = langForPath(location.pathname);
+    if (target !== (document.documentElement.dataset.lang || 'es')) {
+      setLang(target, true);
+    }
+  });
+
+  // Initial language: the URL path is the source of truth. /en/ is always
+  // English, / is always Spanish. This keeps the URL and content consistent
+  // so users can bookmark/share either version unambiguously.
+  //
+  // Soft upgrade: if a returning visitor has explicitly saved 'en' from a
+  // previous visit and lands on /, silently rewrite the URL to /en/ so the
+  // address bar matches what they'll actually see. replaceState (not
+  // pushState) avoids polluting the back-button history.
+  let initialLang = langForPath(location.pathname);
+  if (initialLang === 'es') {
+    try {
+      const stored = localStorage.getItem('aoki-lang');
+      if (stored === 'en') {
+        history.replaceState({ lang: 'en' }, '', '/en/');
+        initialLang = 'en';
+      }
+    } catch (e) {}
+  }
   setLang(initialLang, false);
 
   /* ============================================================
