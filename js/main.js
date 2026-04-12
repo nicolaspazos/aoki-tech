@@ -13,8 +13,15 @@
   let chatBubbles = [];
 
   /* ============================================================
-     i18n — Spanish (source) + English
+     i18n - Spanish (source) + English
      ============================================================ */
+  let policy = null;
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    try {
+      policy = window.trustedTypes.createPolicy('default', { createHTML: s => s });
+    } catch(e) {}
+  }
+  const toHTML = s => policy ? policy.createHTML(s) : s;
   const TRANS = {
     es: {
       'meta.title': 'Aoki Tech | Tu Agente de IA que vende por vos 24/7',
@@ -61,7 +68,7 @@
       'features.f5.title': 'Agenda en Google Calendar',
       'features.f5.desc': 'Sincroniza reuniones, recordatorios y citas con tu calendario. Sin doble agenda, sin pisotones, sin olvidos.',
       'features.f6.title': 'Campañas de envíos masivos',
-      'features.f6.desc': 'Alcanzá a toda tu audiencia con un solo clic. Promociones, recordatorios, novedades — segmentadas y personalizadas.',
+      'features.f6.desc': 'Alcanzá a toda tu audiencia con un solo clic. Promociones, recordatorios, novedades - segmentadas y personalizadas.',
       'features.f7.title': 'Métricas claras',
       'features.f7.desc': 'Dashboard con KPIs accionables: tasa de respuesta, conversión, ventas, satisfacción. Decisiones basadas en datos.',
       'features.f8.title': 'Envío de archivos',
@@ -187,7 +194,7 @@
 
       'features.eyebrow': 'Everything it can do',
       'features.title': 'One AI that replaces<br>an entire team.',
-      'features.lede': "Optimize every interaction and scale your business with tools designed for effortless growth. Your AI Agent answers, sells, schedules and reports — without you lifting a finger.",
+      'features.lede': "Optimize every interaction and scale your business with tools designed for effortless growth. Your AI Agent answers, sells, schedules and reports - without you lifting a finger.",
       'features.f1.title': 'Replies 24/7',
       'features.f1.desc': 'Instant attention at any hour, every day of the year. Never lose a lead because nobody answered.',
       'features.f2.title': 'Tienda Nube integration',
@@ -199,7 +206,7 @@
       'features.f5.title': 'Books in Google Calendar',
       'features.f5.desc': 'Sync meetings, reminders and appointments with your calendar. No double bookings, no clashes, no forgotten dates.',
       'features.f6.title': 'Mass-message campaigns',
-      'features.f6.desc': 'Reach your entire audience with a single click. Promotions, reminders, news — segmented and personalized.',
+      'features.f6.desc': 'Reach your entire audience with a single click. Promotions, reminders, news - segmented and personalized.',
       'features.f7.title': 'Clear metrics',
       'features.f7.desc': 'Dashboard with actionable KPIs: response rate, conversion, sales, satisfaction. Data-driven decisions.',
       'features.f8.title': 'File sharing',
@@ -477,7 +484,7 @@
     });
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
       const k = el.dataset.i18nHtml;
-      if (dict[k] !== undefined) el.innerHTML = dict[k];
+      if (dict[k] !== undefined) el.innerHTML = toHTML(dict[k]);
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const k = el.dataset.i18nPlaceholder;
@@ -693,7 +700,7 @@
     // Force reflow so the next class addition restarts CSS animations cleanly
     void root.offsetWidth;
 
-    // Now set the target-lang palette attr and the running class — both stay on
+    // Now set the target-lang palette attr and the running class - both stay on
     // for the FULL duration of the ribbon animation (1.4s)
     root.dataset.switchingTo = lang;
     void root.offsetWidth;
@@ -782,7 +789,7 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ============================================================
-     CTA form — open the user's mail client without putting a
+     CTA form - open the user's mail client without putting a
      mailto: URL in the page (avoids mixed-content warnings)
      ============================================================ */
   const ctaForm = document.getElementById('cta-form');
