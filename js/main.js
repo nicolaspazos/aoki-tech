@@ -321,6 +321,10 @@
     if (descMeta && dict['meta.description']) descMeta.setAttribute('content', dict['meta.description']);
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', lang === 'en' ? 'en_US' : 'es_AR');
+    document.querySelectorAll('img[data-logo-swap]').forEach(img => {
+      const next = img.dataset['logo' + (lang === 'en' ? 'En' : 'Es')];
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
     const yearEl = document.getElementById('year');

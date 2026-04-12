@@ -46,10 +46,11 @@
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Fonts (non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Public+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Public+Sans:wght@500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Public+Sans:wght@500;600;700;800;900&display=swap" /></noscript>
 
   <link rel="stylesheet" href="css/styles.css?v=20260412c" />
   <link rel="icon" href="aoki-favicon.png" type="image/png" />
@@ -78,7 +79,7 @@
   <header class="site-header" id="site-header">
     <div class="shell header-inner">
       <a class="brand-mark" href="/" aria-label="Aoki Tech">
-        <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" />
+        <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" data-logo-swap data-logo-es="aoki-logo.png" data-logo-en="aoki-logo-en.png" />
       </a>
       <nav class="nav" id="primary-nav" aria-label="Principal">
         <a href="#steps" data-i18n="nav.steps">Cómo funciona</a>
@@ -98,9 +99,9 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
-        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language" data-active="es" title="Idioma / Language">
-          <span class="lang-opt" data-lang="es">ES</span>
-          <span class="lang-opt" data-lang="en">EN</span>
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="ES / EN — Switch language" data-active="es" title="Idioma / Language">
+          <span class="lang-opt" data-lang="es" aria-hidden="true">ES</span>
+          <span class="lang-opt" data-lang="en" aria-hidden="true">EN</span>
         </button>
         <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
           <span></span>
@@ -235,30 +236,30 @@
       </div>
       <div class="marquee-strip" aria-hidden="true">
         <div class="marquee-track">
-          <img src="images/sancor-salud-portada.jpg" alt="Sancor Salud" />
-          <img src="images/tiendanube-logo.png" alt="Tienda Nube" />
-          <img src="images/planout-logo-negro-low.png" alt="Planout" />
-          <img src="images/hpc-logo-completo-01.jpg" alt="HPC" />
-          <img src="images/logo-color.png" alt="" />
-          <img src="images/logo-20eurocafe-20png-20ok.webp" alt="Eurocafé" />
-          <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="Nescafé Espresso" />
-          <img src="images/distri-20nya-20-281-29.png" alt="Distri NYA" />
-          <img src="images/descarga.jpg" alt="" />
-          <img src="images/descarga-20-282-29.png" alt="" />
-          <img src="images/168121.png" alt="" />
-          <img src="images/images-20-284-29.png" alt="" />
-          <img src="images/sancor-salud-portada.jpg" alt="" />
-          <img src="images/tiendanube-logo.png" alt="" />
-          <img src="images/planout-logo-negro-low.png" alt="" />
-          <img src="images/hpc-logo-completo-01.jpg" alt="" />
-          <img src="images/logo-color.png" alt="" />
-          <img src="images/logo-20eurocafe-20png-20ok.webp" alt="" />
-          <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="" />
-          <img src="images/distri-20nya-20-281-29.png" alt="" />
-          <img src="images/descarga.jpg" alt="" />
-          <img src="images/descarga-20-282-29.png" alt="" />
-          <img src="images/168121.png" alt="" />
-          <img src="images/images-20-284-29.png" alt="" />
+          <img src="images/sancor-salud-portada.jpg" alt="Sancor Salud" width="75" height="50" loading="lazy" decoding="async" />
+          <img src="images/tiendanube-logo.png" alt="Tienda Nube" width="67" height="50" loading="lazy" decoding="async" />
+          <img src="images/planout-logo-negro-low.png" alt="Planout" width="140" height="50" loading="lazy" decoding="async" />
+          <img src="images/hpc-logo-completo-01.jpg" alt="HPC" width="83" height="50" loading="lazy" decoding="async" />
+          <img src="images/logo-color.png" alt="" width="76" height="50" loading="lazy" decoding="async" />
+          <img src="images/logo-20eurocafe-20png-20ok.webp" alt="Eurocafé" width="140" height="50" loading="lazy" decoding="async" />
+          <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="Nescafé Espresso" width="66" height="50" loading="lazy" decoding="async" />
+          <img src="images/distri-20nya-20-281-29.png" alt="Distri NYA" width="160" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga.jpg" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga-20-282-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/168121.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/images-20-284-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/sancor-salud-portada.jpg" alt="" width="75" height="50" loading="lazy" decoding="async" />
+          <img src="images/tiendanube-logo.png" alt="" width="67" height="50" loading="lazy" decoding="async" />
+          <img src="images/planout-logo-negro-low.png" alt="" width="140" height="50" loading="lazy" decoding="async" />
+          <img src="images/hpc-logo-completo-01.jpg" alt="" width="83" height="50" loading="lazy" decoding="async" />
+          <img src="images/logo-color.png" alt="" width="76" height="50" loading="lazy" decoding="async" />
+          <img src="images/logo-20eurocafe-20png-20ok.webp" alt="" width="140" height="50" loading="lazy" decoding="async" />
+          <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="" width="66" height="50" loading="lazy" decoding="async" />
+          <img src="images/distri-20nya-20-281-29.png" alt="" width="160" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga.jpg" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/descarga-20-282-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/168121.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
+          <img src="images/images-20-284-29.png" alt="" width="50" height="50" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -268,7 +269,7 @@
       <div class="shell">
         <div class="partner-card reveal">
           <div class="partner-badge">
-            <img src="images/meta-business-partner.jpeg" alt="Meta Business Partner" />
+            <img src="images/meta-business-partner.jpeg" alt="Meta Business Partner" width="396" height="231" loading="lazy" decoding="async" />
           </div>
           <div class="partner-text">
             <span class="eyebrow" data-i18n="partner.eyebrow">Reconocidos por Meta</span>
@@ -539,7 +540,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <span class="footer-logo">
-            <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" />
+            <img src="aoki-logo.png" alt="Aoki Tech" width="200" height="56" loading="lazy" decoding="async" data-logo-swap data-logo-es="aoki-logo.png" data-logo-en="aoki-logo-en.png" />
           </span>
           <p data-i18n="footer.tagline">La plataforma líder en automatización conversacional con IA para LATAM. Hacemos que tus conversaciones vendan por vos, 24/7.</p>
           <div class="footer-providers">
