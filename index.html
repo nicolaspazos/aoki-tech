@@ -54,8 +54,8 @@
   <link rel="icon" href="aoki-favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="aoki-favicon.png" />
 
-  <!-- Theme + Lang bootstrap (prevents FOUC) -->
-  <script src="js/bootstrap.js?v=20260412n"></script>
+  <!-- Theme + Lang bootstrap (inlined to run before paint without a blocking request) -->
+  <script>(function(){try{var t=localStorage.getItem('aoki-theme');document.documentElement.setAttribute('data-theme',t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}try{var l=localStorage.getItem('aoki-lang');if(l==='en'||l==='es'){document.documentElement.lang=l;document.documentElement.dataset.lang=l;}}catch(e){}})();</script>
 </head>
 <body>
 
@@ -214,7 +214,6 @@
           <img src="images/hpc-logo-completo-01.webp" alt="HPC" width="83" height="50" loading="lazy" decoding="async" />
           <img src="images/logo-color.webp" alt="" width="76" height="50" loading="lazy" decoding="async" />
           <img src="images/logo-20eurocafe-20png-20ok.webp" alt="Eurocafé" width="140" height="50" loading="lazy" decoding="async" />
-          <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="Nescafé Espresso" width="66" height="50" loading="lazy" decoding="async" />
           <img src="images/distri-20nya-20-281-29.webp" alt="Distri NYA" width="160" height="50" loading="lazy" decoding="async" />
           <img src="images/descarga.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
           <img src="images/descarga-20-282-29.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
@@ -226,7 +225,6 @@
           <img src="images/hpc-logo-completo-01.webp" alt="" width="83" height="50" loading="lazy" decoding="async" />
           <img src="images/logo-color.webp" alt="" width="76" height="50" loading="lazy" decoding="async" />
           <img src="images/logo-20eurocafe-20png-20ok.webp" alt="" width="140" height="50" loading="lazy" decoding="async" />
-          <img src="images/nescafe-cc-81-espresso-2022ok-20-281-29.avif" alt="" width="66" height="50" loading="lazy" decoding="async" />
           <img src="images/distri-20nya-20-281-29.webp" alt="" width="160" height="50" loading="lazy" decoding="async" />
           <img src="images/descarga.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
           <img src="images/descarga-20-282-29.webp" alt="" width="50" height="50" loading="lazy" decoding="async" />
