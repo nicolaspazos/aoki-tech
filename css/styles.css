@@ -338,6 +338,31 @@ p { margin: 0; }
   [data-theme="dark"] .site-header.is-scrolled {
     background: rgba(6, 9, 18, 0.72);
   }
+  /* The desktop pill-morph timing (0.8s) feels sluggish on mobile where
+     viewports are smaller and scroll gestures are quick. Shorten every
+     geometry transition on the header + logo to a snappier 0.55s so the
+     scroll state settles faster without losing the glide. */
+  .site-header {
+    transition:
+      background 0.35s var(--ease),
+      box-shadow 0.35s var(--ease),
+      border-color 0.35s var(--ease),
+      border-radius 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+      top 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+      left 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+      right 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+      padding 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .brand-mark {
+    transition:
+      height 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+      transform 0.4s var(--ease);
+  }
+  .brand-mark img {
+    transition:
+      transform 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+      filter 0.4s var(--ease);
+  }
 }
 .header-inner {
   display: flex;
@@ -576,13 +601,14 @@ p { margin: 0; }
     display: inline-flex;
     align-items: center;
     position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
+    top: 0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 10;
   }
   .nav-brand img {
     display: block;
-    height: 44px;
+    height: 60px;
     width: auto;
   }
 
@@ -626,9 +652,9 @@ p { margin: 0; }
 
   /* Plain text links (Cómo funciona, Clientes, Precios) */
   .nav > a:not(.header-login):not(.header-secondary):not(.header-cta) {
-    font-size: 1.5rem !important;
+    font-size: 1.1rem !important;
     color: var(--text);
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 1rem;
     width: auto;
   }
 
