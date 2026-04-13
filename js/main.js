@@ -521,45 +521,37 @@
   const nav = document.getElementById('primary-nav');
   const siteHeader = document.getElementById('site-header');
   
+  const setNavOpen = (open) => {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle('is-open', open);
+    navToggle.classList.toggle('is-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (siteHeader) {
+      if (open) {
+        siteHeader.classList.remove('is-nav-closing');
+        siteHeader.classList.add('is-nav-open');
+      } else {
+        siteHeader.classList.remove('is-nav-open');
+        siteHeader.classList.add('is-nav-closing');
+        setTimeout(() => siteHeader.classList.remove('is-nav-closing'), 500);
+      }
+    }
+  };
+
   const navCloseBtn = document.querySelector('.nav-close');
   if (navCloseBtn) {
-    navCloseBtn.addEventListener('click', () => {
-      nav.classList.remove('is-open');
-      document.body.style.overflow = '';
-      navToggle.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
+    navCloseBtn.addEventListener('click', () => setNavOpen(false));
   }
 
   const navLinks = nav ? nav.querySelectorAll('a') : [];
   if (navLinks.length) {
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('is-open');
-        navToggle.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', () => setNavOpen(false));
     });
   }
 
   if (navToggle && nav) {
-    const setNavOpen = (open) => {
-      nav.classList.toggle('is-open', open);
-      navToggle.classList.toggle('is-open', open);
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.style.overflow = open ? 'hidden' : '';
-      if (siteHeader) {
-        if (open) {
-          siteHeader.classList.remove('is-nav-closing');
-          siteHeader.classList.add('is-nav-open');
-        } else {
-          siteHeader.classList.remove('is-nav-open');
-          siteHeader.classList.add('is-nav-closing');
-          setTimeout(() => siteHeader.classList.remove('is-nav-closing'), 500);
-        }
-      }
-    };
     navToggle.addEventListener('click', () => setNavOpen(!nav.classList.contains('is-open')));
   }
 

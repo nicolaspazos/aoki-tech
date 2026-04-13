@@ -394,6 +394,7 @@ p { margin: 0; }
   max-width: none;
   transform-origin: left center;
   will-change: transform;
+  filter: drop-shadow(0 0 18px rgba(19, 130, 164, 0.32));
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), filter 0.5s var(--ease);
 }
 .is-scrolled .brand-mark { height: 44px; }
@@ -405,7 +406,7 @@ p { margin: 0; }
   .is-scrolled .brand-mark img { transform: scale(0.8261); } /* 38 / 46 */
 }
 .brand-mark:hover { transform: scale(1.04); }
-.brand-mark:hover img { filter: brightness(1.05); }
+.brand-mark:hover img { filter: brightness(1.05) drop-shadow(0 0 22px rgba(19, 130, 164, 0.42)); }
 
 .nav {
   display: flex;
@@ -597,19 +598,21 @@ p { margin: 0; }
     transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
   }
 
-  .nav-brand {
+  .nav > .nav-brand {
     display: inline-flex;
     align-items: center;
     position: absolute;
-    top: 0.85rem;
+    top: 2rem;
     left: 50%;
     transform: translateX(-50%);
+    padding: 0;
     z-index: 10;
   }
-  .nav-brand img {
+  .nav > .nav-brand img {
     display: block;
     height: 60px;
     width: auto;
+    filter: drop-shadow(0 0 20px rgba(19, 130, 164, 0.32));
   }
 
   .nav-close {
